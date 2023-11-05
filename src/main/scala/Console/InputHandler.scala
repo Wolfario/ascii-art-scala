@@ -1,9 +1,10 @@
 package Console
-import Image.Image
+import Image.{Image, ImportedImage, EmptyImage, RandomImage}
 import Filter.{Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
 
 class InputHandler {
 
+  private val image: Image = new EmptyImage
   private val filters: List[Filter] = List()
   def handle(args: Array[String]): Boolean = {
 
