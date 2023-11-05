@@ -1,11 +1,12 @@
 package Console
 import Image.{Image, ImportedImage, EmptyImage, RandomImage}
+import Import.ImageImporter
 import Filter.{Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
 
 class InputHandler {
 
-  private val image: Image = new EmptyImage
-  private val filters: List[Filter] = List()
+  private var image: Image = new EmptyImage
+  private var filters: List[Filter] = List()
   def handle(args: Array[String]): Option[Boolean] = {
 
     // It will be possible to get outside the loop only if we do not enter it (No arguments)
@@ -16,11 +17,22 @@ class InputHandler {
         return None
       }
 
-      var methodName = arg.substring(2)
+      val methodName = arg.substring(2)
       methodName match {
         case "image" =>
-          // TODO
+          if (i == (args.length - 1)) {
+            println("Invalid argument.")
+            return None
+          }
 
+          val imageImporter = new ImageImporter()
+          val optionImage: Option[Image] = imageImporter.loadFrom(args.apply(i + 1))
+          if (imageImporter.loadFrom(args.apply(i + 1)).isEmpty) {
+            println("Invalid argument.")
+            return None
+          }
+          image = optionImage.get
+          i += 1
         case "image-random" =>
           // TODO
 
