@@ -13,7 +13,7 @@ class InputHandler(args: Array[String]) {
 
     for (arg <- args) {
       // Arguments must come in pairs, where the first argument must begin with "--"
-      if (arg.length() <= 2 || !(arg[0] != '-' || arg[1] != '-')) {
+      if (arg.length() <= 2 || !(arg[0] == '-' && arg[1] == '-')) {
         throw new Exception("Invalid argument.")
       }
 
