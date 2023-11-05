@@ -6,54 +6,54 @@ class InputHandler {
 
   private val image: Image = new EmptyImage
   private val filters: List[Filter] = List()
-  def handle(args: Array[String]): Boolean = {
+  def handle(args: Array[String]): Option[Boolean] = {
 
     // It will be possible to get outside the loop only if we do not enter it (No arguments)
     for ((arg, i) <- args.view.zipWithIndex) {
       // Arguments must come in pairs, where the first argument must begin with "--"
       if (arg.length() <= 2 || !(arg.charAt(0) == '-' && arg.charAt(1) == '-')) {
         println("Invalid argument.")
-        return false
+        return None
       }
 
       var methodName = arg.substring(2)
       methodName match {
         case "image" =>
-        // TODO
+          // TODO
 
         case "image-random" =>
-        // TODO
+          // TODO
 
         case "rotate" =>
-        // TODO
+          // TODO
 
         case "invert" =>
-        // TODO
+          // TODO
 
         case "flip" =>
-        // TODO
+          // TODO
 
         case "brightness" =>
-        // TODO
+          // TODO
 
         case "font-aspect-ratio" =>
-        // TODO
+          // TODO
 
         case "output-console" =>
-        // TODO
+          // TODO
 
         case "output-file" =>
-        // TODO
+          // TODO
 
         case other =>
           println("Invalid argument.")
-          return false
+          return None
       }
     }
 
     // We need at least one image argument for correct working
     println("No arguments in input.")
-    return false
+    None
   }
 
 
