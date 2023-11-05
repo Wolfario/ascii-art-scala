@@ -1,7 +1,9 @@
 package Import
 import Image.Image
 
-class ImageImporter(Image: Image) {
+class ImageImporter() {
 
-  // TODO
+  def loadFrom(path: String): Option[Image] = {
+    // TODO
+  }
 }
