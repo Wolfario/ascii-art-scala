@@ -1,8 +1,9 @@
 package Image
-import javax.imageio.ImageIO
-import java.io.File
+import java.awt.image.BufferedImage
 
-abstract class Image {
+trait Image {
 
-  // TODO
+  def get: Option[BufferedImage]
+
+  def getSize: Option[(Int, Int)]
 }

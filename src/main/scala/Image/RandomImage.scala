@@ -1,7 +1,11 @@
 package Image
 import Image.Image
 
-class RandomImage extends Image {
+import java.awt.image.BufferedImage
 
-  // TODO
+class RandomImage(height: Int, width: Int) extends Image {
+
+  override def get: Option[BufferedImage] = ??? // TODO
+
+  override def getSize: Option[(Int, Int)] = Some((height, width))
 }
