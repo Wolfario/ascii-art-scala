@@ -29,7 +29,7 @@ class InputHandler {
             }
 
             val imageImporter = new ImageImporter()
-            val optionImage: Option[Image] = imageImporter.loadFrom(args.apply(i + 1))
+            val optionImage: Option[ImportedImage] = imageImporter.loadFrom(args.apply(i + 1))
             if (imageImporter.loadFrom(args.apply(i + 1)).isEmpty) {
               println("Invalid argument.")
               return None

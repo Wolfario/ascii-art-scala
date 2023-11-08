@@ -8,7 +8,7 @@ import javax.imageio.ImageIO
 
 class ImageImporter() {
 
-  def loadFrom(path: String): Option[Image] = {
+  def loadFrom(path: String): Option[ImportedImage] = {
     try {
       val imageFile: File = new File(path)
       val image: BufferedImage = ImageIO.read(imageFile)
