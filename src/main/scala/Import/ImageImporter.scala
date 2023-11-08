@@ -6,15 +6,8 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import javax.imageio.ImageIO
 
-trait ImageImporter {
+class ImageImporter() {
 
-  /**
-   * Creates an Image object from the input path to a specific file.
-   * The implementation is similar to formats such as PNG, JPG,
-   * so the implementation is in the trait
-   * @param path
-   * @return Image as an Option
-   */
   def loadFrom(path: String): Option[Image] = {
     try {
       val imageFile: File = new File(path)
@@ -32,13 +25,4 @@ trait ImageImporter {
         None
     }
   }
-
-  /**
-   * Returns the extension of the
-   * file it is working with
-   *
-   * @param path
-   * @return extension as string
-   */
-  def format: String
 }
