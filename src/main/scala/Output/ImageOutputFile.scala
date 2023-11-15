@@ -1,7 +1,8 @@
 package Output
 
-class ImageOutputFile(ImageASCII: String) extends ImageOutput[String] {
+class ImageOutputFile() extends ImageOutput[String] {
 
+  private var imageASCII: Option[String] = None
   override def output(path: String): Unit = {
 
   }

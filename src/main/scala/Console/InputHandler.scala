@@ -2,15 +2,18 @@ package Console
 import Image.{Image, ImportedImage, EmptyImage, RandomImage}
 import Import.ImageImporter
 import Filter.{Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
+import Output.{ImageOutput, ImageOutputFile, ImageOutputConsole}
 
 class InputHandler {
 
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
+  private var output: Option[ImageOutput[_]] = None
   def handle(args: Array[String]): Option[Boolean] = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
     var emptyCheck: Boolean = false
+    var outputCheck: Boolean = false
 
     // It will be possible to get outside the loop only if we do not enter it (No arguments)
     for ((arg, i) <- args.view.zipWithIndex) {
@@ -61,11 +64,11 @@ class InputHandler {
             // TODO
 
           case "output-console" =>
-            // TODO
-
+            outputCheck = true
+            output = Some(new ImageOutputConsole())
           case "output-file" =>
-            // TODO
-
+            outputCheck = true
+            output = Some(new ImageOutputFile())
           case other =>
             println("Invalid argument.")
             return None
@@ -74,7 +77,11 @@ class InputHandler {
       mainArgument = true
     }
 
-      // We need at least one image argument for correct working
+    if (!outputCheck) {
+      println("Operations were carried out without output.")
+    }
+
+    // We need at least one image argument for correct working
     if (!emptyCheck) {
       println("No arguments in input.")
       None
@@ -82,7 +89,7 @@ class InputHandler {
     Some(true)
   }
 
-
+  def getOutput: Option[ImageOutput[_]] = output
 
 
 }

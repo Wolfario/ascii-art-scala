@@ -2,7 +2,12 @@ package Output
 import Image.Image
 
 trait ImageOutput[T] {
-  def output(path: T): Unit = {
 
+  private var imageASCII: Option[String] = None
+
+  def output(path: T): Unit
+
+  def set(textImage: String): Unit = {
+    imageASCII = Some(textImage)
   }
 }
