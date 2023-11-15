@@ -10,6 +10,7 @@ class InputHandler {
   def handle(args: Array[String]): Option[Boolean] = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
+    var emptyCheck: Boolean = false
 
     // It will be possible to get outside the loop only if we do not enter it (No arguments)
     for ((arg, i) <- args.view.zipWithIndex) {
@@ -23,6 +24,7 @@ class InputHandler {
       val methodName = arg.substring(2)
         methodName match {
           case "image" =>
+            emptyCheck = true
             if (i == (args.length - 1)) {
               println("Invalid argument.")
               return None
@@ -38,8 +40,11 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "image-random" =>
-            // TODO
+            emptyCheck = true
+            var default_height = 384
+            var default_width = 512
 
+            image = new RandomImage(default_height, default_width)
           case "rotate" =>
             // TODO
 
@@ -69,9 +74,12 @@ class InputHandler {
       mainArgument = true
     }
 
-    // We need at least one image argument for correct working
-    println("No arguments in input.")
-    None
+      // We need at least one image argument for correct working
+    if (!emptyCheck) {
+      println("No arguments in input.")
+      None
+    }
+    Some(true)
   }
 
 
