@@ -1,7 +1,8 @@
 package Output
-import Output.ImageOutput
 
-class ImageOutputFile() extends ImageOutput {
+class ImageOutputFile(ImageASCII: String) extends ImageOutput[String] {
 
-  // TODO
+  override def output(path: String): Unit = {
+
+  }
 }

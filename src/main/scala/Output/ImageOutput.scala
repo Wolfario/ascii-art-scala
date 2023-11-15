@@ -1,7 +1,8 @@
 package Output
 import Image.Image
 
-abstract class ImageOutput {
+trait ImageOutput[T] {
+  def output(path: T): Unit = {
 
-  // TODO
+  }
 }
