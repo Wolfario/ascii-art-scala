@@ -8,7 +8,7 @@ class InputHandler {
 
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
-  private var output: Option[ImageOutput[_]] = None
+  private var output: Option[ImageOutput] = None
   def handle(args: Array[String]): Option[Boolean] = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
@@ -89,7 +89,10 @@ class InputHandler {
     Some(true)
   }
 
-  def getOutput: Option[ImageOutput[_]] = output
+  def getImage: Image = image
 
+  def getFilters: List[Filter] = filters
+
+  def getOutput: Option[ImageOutput] = output
 
 }

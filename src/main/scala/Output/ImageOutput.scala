@@ -1,11 +1,13 @@
 package Output
 import Image.Image
 
-trait ImageOutput[T] {
+trait ImageOutput {
 
   private var imageASCII: Option[String] = None
 
-  def output(path: T): Unit
+  def output(): Unit
+
+  def output(path: String): Unit
 
   def set(textImage: String): Unit = {
     imageASCII = Some(textImage)
