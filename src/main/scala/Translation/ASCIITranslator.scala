@@ -7,6 +7,7 @@ class ASCIITranslator(Image: Image, ASCIISequence: Seq[Char]) {
 
   // Linear translation set as default
   private var translationType: Translation = new LinearTranslation()
+  private var characters: List[Char] = List()
 
   def caclulateGreyscale(image: Image): Array[Array[Int]] = {
     image.get match {
@@ -30,6 +31,30 @@ class ASCIITranslator(Image: Image, ASCIISequence: Seq[Char]) {
 
       case None => Array.empty
     }
+  }
+
+  def choiceKnownTable(table_name: String): Boolean = {
+    characters = List()
+
+    table_name match {
+      case "standard" =>
+        var table = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+        for (char <- table) {
+          characters = characters :+ char
+        }
+        true
+      case _ =>
+        println("Unknown character table")
+        false
+    }
+  }
+
+  def choiceTable(table: String): Boolean = {
+    characters = List()
+    for (char <- table) {
+      characters = characters :+ char
+    }
+    true
   }
 
   def useLinearTranslation(): Unit = translationType = new LinearTranslation()
