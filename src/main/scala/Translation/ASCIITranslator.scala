@@ -9,7 +9,7 @@ class ASCIITranslator(Image: Image) {
   private var translationType: Translation = new LinearTranslation()
   private var characters: List[Char] = List()
 
-  def caclulateGreyscale(image: Image): Array[Array[Int]] = {
+  private def calculateGreyscale(image: Image): Array[Array[Int]] = {
     image.get match {
       case Some(img) =>
         val width = img.getWidth
@@ -58,7 +58,7 @@ class ASCIITranslator(Image: Image) {
   }
 
   def translate(): Array[Array[Char]] = {
-    var greyscaleImage = this.caclulateGreyscale(Image)
+    var greyscaleImage = this.calculateGreyscale(Image)
     var asciiImage = translationType.toASCII(greyscaleImage, characters)
     asciiImage
   }
