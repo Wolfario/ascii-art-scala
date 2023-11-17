@@ -3,7 +3,7 @@ import java.awt.Color
 import Image.Image
 import Translation.Type.{Translation, LinearTranslation, NonLinearTranslation}
 
-class ASCIITranslator(Image: Image, ASCIISequence: Seq[Char]) {
+class ASCIITranslator(Image: Image) {
 
   // Linear translation set as default
   private var translationType: Translation = new LinearTranslation()
@@ -55,6 +55,12 @@ class ASCIITranslator(Image: Image, ASCIISequence: Seq[Char]) {
       characters = characters :+ char
     }
     true
+  }
+
+  def translate(): Array[Array[Char]] = {
+    var greyscaleImage = this.caclulateGreyscale(Image)
+    var asciiImage = translationType.toASCII(greyscaleImage, characters)
+    asciiImage
   }
 
   def useLinearTranslation(): Unit = translationType = new LinearTranslation()
