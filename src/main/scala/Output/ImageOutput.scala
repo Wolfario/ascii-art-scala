@@ -3,13 +3,11 @@ import Image.Image
 
 trait ImageOutput {
 
-  private var imageASCII: Option[String] = None
+  private var image: Array[Array[Char]] = Array.empty
 
   def output(): Unit
 
   def output(path: String): Unit
 
-  def set(textImage: String): Unit = {
-    imageASCII = Some(textImage)
-  }
+  def set(newImage: Array[Array[Char]]): Unit
 }
