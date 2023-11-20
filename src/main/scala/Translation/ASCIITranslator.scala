@@ -25,7 +25,7 @@ class ASCIITranslator(Image: Image) {
           val green = pixel.getGreen
           val blue = pixel.getBlue
           val grey: Int = (0.3 * red + 0.59 * green + 0.11 * blue).toInt
-          greyscale_array(y)(x) = grey
+          greyscale_array(x)(y) = grey
         }
         greyscale_array
 
