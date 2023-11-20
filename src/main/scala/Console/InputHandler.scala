@@ -67,8 +67,22 @@ class InputHandler {
             outputCheck = true
             output = Some(new ImageOutputConsole())
           case "output-file" =>
+            if (i == (args.length - 1)) {
+              println("Invalid argument.")
+              return None
+            }
             outputCheck = true
-            output = Some(new ImageOutputFile())
+            val path = args.apply(i + 1)
+            try {
+              println("im here")
+              output = Some(new ImageOutputFile(path))
+            } catch {
+              case e: Exception =>
+                println("Invalid output path.")
+                return None
+            }
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
           case other =>
             println("Invalid argument.")
             return None
