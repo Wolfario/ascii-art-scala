@@ -13,7 +13,5 @@ class ImageOutputConsole() extends ImageOutput {
     }
   }
 
-  override def output(path: String): Unit = ???
-
   override def set(newImage: Array[Array[Char]]): Unit = image = newImage
 }

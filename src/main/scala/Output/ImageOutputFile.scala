@@ -1,14 +1,27 @@
 package Output
+import java.nio.file.{Files, Paths}
+import java.io.{File, PrintWriter}
 
-class ImageOutputFile() extends ImageOutput {
+class ImageOutputFile(path: String) extends ImageOutput {
 
-  private var image: Array[Array[Char]] = Array.empty
-
-  override def output(): Unit = ???
-
-  override def output(path: String): Unit = {
-
+  if (!Files.exists(Paths.get(path))) {
+    println("wtf?")
+    Files.createFile(Paths.get(path))
   }
 
-  def set(newImage: Array[Array[Char]]): Unit = image = newImage
+  private var image: Array[Array[Char]] = Array.empty
+  private val file = new File(path)
+
+  override def output(): Unit = {
+    val writer = new PrintWriter(file)
+    for (row <- image) {
+      for (char <- row) {
+        writer.print(char)
+      }
+      writer.println()
+    }
+    writer.close()
+  }
+
+  override def set(newImage: Array[Array[Char]]): Unit = image = newImage
 }

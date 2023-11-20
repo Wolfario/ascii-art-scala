@@ -7,7 +7,5 @@ trait ImageOutput {
 
   def output(): Unit
 
-  def output(path: String): Unit
-
   def set(newImage: Array[Array[Char]]): Unit
 }
