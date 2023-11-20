@@ -74,7 +74,8 @@ class InputHandler {
             return None
         }
       }
-      mainArgument = true
+      else
+        mainArgument = true
     }
 
     if (!outputCheck) {
