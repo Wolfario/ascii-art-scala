@@ -1,6 +1,7 @@
 package Filter
+import Image.Image
 
 abstract class Filter {
 
-  // TODO
+  def apply(image: Image): Image
 }
