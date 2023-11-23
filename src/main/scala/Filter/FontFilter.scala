@@ -1,6 +1,7 @@
 package Filter
+import Image.Image
 
-case class FontFilter() extends Filter {
+class FontFilter() extends Filter {
 
-  // TODO
+  override def apply(image: Image): Image = ???
 }

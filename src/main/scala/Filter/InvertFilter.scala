@@ -1,6 +1,7 @@
 package Filter
+import Image.Image
 
-case class InvertFilter() extends Filter {
+class InvertFilter() extends Filter {
 
-  // TODO
+  override def apply(image: Image): Image = ???
 }

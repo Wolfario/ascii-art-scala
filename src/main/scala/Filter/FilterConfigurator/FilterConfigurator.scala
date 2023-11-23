@@ -1,8 +1,8 @@
 package Filter.FilterConfigurator
+import Image.Image
+import Filter.{Filter, BrightnessFilter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
 
 class FilterConfigurator {
-
-  def apply_filter(image: Image, filters: List[Filter]): Image
 
   // TODO
 }

@@ -1,6 +1,8 @@
 package Filter
 
-case class BrightnessFilter() extends Filter {
+import Image.Image
 
-  // TODO
+class BrightnessFilter() extends Filter {
+
+  override def apply(image: Image): Image = ???
 }

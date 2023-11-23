@@ -1,6 +1,6 @@
 package Filter
+import Image.Image
+class FlipFilter() extends Filter {
 
-case class FlipFilter() extends Filter {
-
- // TODO
+  override def apply(image: Image): Image = ???
 }

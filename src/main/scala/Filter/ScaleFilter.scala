@@ -1,6 +1,7 @@
 package Filter
+import Image.Image
 
-case class ScaleFilter() extends Filter {
+class ScaleFilter() extends Filter {
 
-  // TODO
+  override def apply(image: Image): Image = ???
 }

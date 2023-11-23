@@ -49,8 +49,49 @@ class InputHandler {
 
             image = new RandomImage(default_height, default_width)
           case "rotate" =>
-            // TODO
+            if (i == (args.length - 1)) {
+              println("Invalid argument.")
+              return None
+            }
 
+            var rotateInput: String = args.apply(i + 1)
+            var sign = '+'
+
+            if (rotateInput(0) == '+' || rotateInput(0) == '-') {
+              if (rotateInput.length == 1) {
+                println("Invalid rotate value.")
+                return None
+              }
+              sign = rotateInput(0)
+              rotateInput = rotateInput.drop(1)
+            }
+            else if (!rotateInput(0).isDigit) {
+              println("Invalid rotate value.")
+              return None
+            }
+
+            for (char <- rotateInput) {
+              if (!char.isDigit) {
+                println("Invalid rotate value.")
+                return None
+              }
+            }
+
+            // We will use this filter only for numbers that are multiples of 90
+            if (rotateInput.toInt % 90 != 0) {
+              println("Rotate value is not multiples of 90.")
+              return None
+            }
+
+            var degree = rotateInput.toInt % 360
+            if (sign == '-') {
+              degree = 360 - degree
+            }
+
+            val newFilter = new RotateFilter(degree)
+            filters = filters :+ newFilter
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
           case "invert" =>
             // TODO
 
@@ -74,7 +115,6 @@ class InputHandler {
             outputCheck = true
             val path = args.apply(i + 1)
             try {
-              println("im here")
               output = Some(new ImageOutputFile(path))
             } catch {
               case e: Exception =>
