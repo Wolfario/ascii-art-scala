@@ -93,8 +93,8 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "invert" =>
-            // TODO
-
+            val newFilter = new InvertFilter()
+            filters = filters :+ newFilter
           case "flip" =>
             // TODO
 
