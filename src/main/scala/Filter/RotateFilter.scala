@@ -11,16 +11,16 @@ class RotateFilter(degree: Int) extends Filter {
       image
     }
     else {
-      val bufferedImg = image.get.get
+      val bufferedImg = image.get
       val radians = Math.toRadians(degree)
-      val centerX = image.getSize.get._2 / 2
-      val centerY = image.getSize.get._1 / 2
+      val centerX = image.getSize._2 / 2
+      val centerY = image.getSize._1 / 2
 
       val transform = new AffineTransform()
       transform.rotate(radians, centerX, centerY)
 
       val op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR)
-      val rotatedImage = new BufferedImage(image.getSize.get._2, image.getSize.get._1, bufferedImg.getType)
+      val rotatedImage = new BufferedImage(image.getSize._2, image.getSize._1, bufferedImg.getType)
       op.filter(bufferedImg, rotatedImage)
 
       new ImportedImage(rotatedImage.getHeight, rotatedImage.getWidth, rotatedImage)

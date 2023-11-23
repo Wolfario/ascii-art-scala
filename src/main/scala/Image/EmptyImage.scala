@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage
 
 class EmptyImage extends Image {
 
-  override def get: Option[BufferedImage] = None
+  override def get: BufferedImage = new BufferedImage(0, 0, BufferedImage.TYPE_INT_RGB)
 
-  override def getSize: Option[(Int, Int)] = None
+  override def getSize: (Int, Int) = (0, 0)
 }

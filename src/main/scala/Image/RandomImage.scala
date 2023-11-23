@@ -24,9 +24,9 @@ class RandomImage(height: Int, width: Int) extends Image {
     }
     returnImage
   }
-  override def get: Option[BufferedImage] = Some(generateImage)
+  override def get: BufferedImage = generateImage
 
-  override def getSize: Option[(Int, Int)] = Some((height, width))
+  override def getSize: (Int, Int) = (height, width)
 
 
 

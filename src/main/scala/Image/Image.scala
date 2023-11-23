@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage
 
 trait Image {
 
-  def get: Option[BufferedImage]
+  def get: BufferedImage
 
-  def getSize: Option[(Int, Int)]
+  def getSize: (Int, Int)
 }
