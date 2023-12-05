@@ -1,7 +1,7 @@
 package Filter
-import Image.SignImage
+import Image.GrayscaleImage
 
 trait Filter {
 
-  def apply(image: SignImage): SignImage
+  def apply(image: GrayscaleImage): GrayscaleImage
 }

@@ -1,6 +1,7 @@
 package Translation
 import java.awt.Color
-import Image.{Image, SignImage}
+import Filter.Filter
+import Image.{Image, GrayscaleImage}
 import Translation.Type.{LinearTranslation, NonLinearTranslation, Translation}
 
 class ASCIITranslator(Image: Image) {
@@ -8,6 +9,7 @@ class ASCIITranslator(Image: Image) {
   // Linear translation set as default
   private var translationType: Translation = new LinearTranslation()
   private var characters: List[Char] = List()
+  private var filters: List[Filter] = List()
 
   private def calculateGreyscale(image: Image): Array[Array[Int]] = {
       val width = image.getSize._2
@@ -52,10 +54,15 @@ class ASCIITranslator(Image: Image) {
     true
   }
 
-  def translate(): SignImage = {
-    var greyscaleImage = this.calculateGreyscale(Image)
-    var asciiImage = translationType.toASCII(greyscaleImage, characters)
-    new SignImage(Image.getSize._1, Image.getSize._2, Image.get, asciiImage)
+  def setFilters(inFilters: List[Filter]): Unit = filters = inFilters
+
+  def translate(): Array[Array[Char]] = {
+    var greyscaleImage = new GrayscaleImage(Image.getSize._1, Image.getSize._2, this.calculateGreyscale(Image))
+    for (filter <- filters) {
+      greyscaleImage = filter.apply(greyscaleImage)
+    }
+    var asciiImage = translationType.toASCII(greyscaleImage.getGreyscale, characters)
+    asciiImage
   }
 
   def useLinearTranslation(): Unit = translationType = new LinearTranslation()
