@@ -77,12 +77,6 @@ class InputHandler {
               }
             }
 
-            // We will use this filter only for numbers that are multiples of 90
-            if (rotateInput.toInt % 90 != 0) {
-              println("Rotate value is not multiples of 90.")
-              return None
-            }
-
             var degree = rotateInput.toInt % 360
             if (sign == '-') {
               degree = 360 - degree

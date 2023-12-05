@@ -1,29 +1,36 @@
 package Filter
-import Image.{Image, ImportedImage}
-import java.awt.geom.AffineTransform
-import java.awt.image.AffineTransformOp
-import java.awt.image.BufferedImage
-
+import Image.GrayscaleImage
 class RotateFilter(degree: Int) extends Filter {
 
-   override def apply(image: Image): Image = {
-    if (degree == 0) {
-      image
-    }
-    else {
-      val bufferedImg = image.get
-      val radians = Math.toRadians(degree)
-      val centerX = image.getSize._2 / 2
-      val centerY = image.getSize._1 / 2
+  if ((degree % 90) != 0) {
+    throw new Exception("Rotate value is not multiples of 90.")
+  }
 
-      val transform = new AffineTransform()
-      transform.rotate(radians, centerX, centerY)
+   override def apply(image: GrayscaleImage): GrayscaleImage = {
+     val grayscale = image.getGreyscale
+     val width = image.getSize._2
+     val height = image.getSize._1
 
-      val op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR)
-      val rotatedImage = new BufferedImage(image.getSize._2, image.getSize._1, bufferedImg.getType)
-      op.filter(bufferedImg, rotatedImage)
-
-      new ImportedImage(rotatedImage.getHeight, rotatedImage.getWidth, rotatedImage)
-    }
+     degree match {
+       case 90 | -270 =>
+         val rotatedImage = Array.ofDim[Int](width, height)
+         for (i <- 0 until height; j <- 0 until width) {
+           rotatedImage(j)(height - 1 - i) = grayscale(i)(j)
+         }
+         new GrayscaleImage(width, height, rotatedImage)
+       case -90 | 270 =>
+         val rotatedImage = Array.ofDim[Int](width, height)
+         for (i <- 0 until height; j <- 0 until width) {
+           rotatedImage(width - 1 - j)(i) = grayscale(i)(j)
+         }
+         new GrayscaleImage(width, height, rotatedImage)
+       case 180 | -180 =>
+         val rotatedImage = Array.ofDim[Int](height, width)
+         for (i <- 0 until height; j <- 0 until width) {
+           rotatedImage(height - 1 - i)(width - 1 - j) = grayscale(i)(j)
+         }
+         new GrayscaleImage(height, width, rotatedImage)
+       case _ => return image
+     }
   }
 }
