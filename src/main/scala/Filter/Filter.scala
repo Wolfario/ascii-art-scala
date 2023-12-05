@@ -1,7 +1,7 @@
 package Filter
-import Image.Image
+import Image.SignImage
 
-abstract class Filter {
+trait Filter {
 
-  def apply(image: Image): Image
+  def apply(image: SignImage): SignImage
 }
