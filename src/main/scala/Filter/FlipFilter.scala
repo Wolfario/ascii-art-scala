@@ -1,10 +1,10 @@
 package Filter
-import Image.{Image, GrayscaleImage}
+import Image.{Image, GreyscaleImage}
 
 import java.awt.image.BufferedImage
 class FlipFilter(axis: String) extends Filter {
 
-  override def apply(image: GrayscaleImage): GrayscaleImage = {
+  override def apply(image: GreyscaleImage): GreyscaleImage = {
     var flipImage: Array[Array[Int]] = image.getGreyscale
 
     if (axis(0) == 'x' && axis.length == 1) {
@@ -16,7 +16,7 @@ class FlipFilter(axis: String) extends Filter {
     else {
       throw new Exception("Wrong flip axis.")
     }
-    new GrayscaleImage(image.getSize._1, image.getSize._2, flipImage)
+    new GreyscaleImage(image.getSize._1, image.getSize._2, flipImage)
   }
 
   private def flipX(width: Int, height: Int, image: Array[Array[Int]]): Array[Array[Int]] = {

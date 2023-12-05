@@ -1,7 +1,7 @@
 package Filter
-import Image.GrayscaleImage
+import Image.GreyscaleImage
 
 trait Filter {
 
-  def apply(image: GrayscaleImage): GrayscaleImage
+  def apply(image: GreyscaleImage): GreyscaleImage
 }

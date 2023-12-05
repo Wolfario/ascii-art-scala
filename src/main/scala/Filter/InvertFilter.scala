@@ -1,9 +1,9 @@
 package Filter
-import Image.GrayscaleImage
+import Image.GreyscaleImage
 
 class InvertFilter() extends Filter {
 
-  override def apply(image: GrayscaleImage): GrayscaleImage = {
+  override def apply(image: GreyscaleImage): GreyscaleImage = {
     val width = image.getSize._2
     val height = image.getSize._1
 
@@ -17,6 +17,6 @@ class InvertFilter() extends Filter {
       invertedImage(y)(x) = invertedPixel
     }
 
-    new GrayscaleImage(height, width, invertedImage)
+    new GreyscaleImage(height, width, invertedImage)
   }
 }

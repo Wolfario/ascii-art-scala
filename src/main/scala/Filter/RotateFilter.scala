@@ -1,12 +1,12 @@
 package Filter
-import Image.GrayscaleImage
+import Image.GreyscaleImage
 class RotateFilter(degree: Int) extends Filter {
 
   if ((degree % 90) != 0) {
     throw new Exception("Rotate value is not multiples of 90.")
   }
 
-   override def apply(image: GrayscaleImage): GrayscaleImage = {
+   override def apply(image: GreyscaleImage): GreyscaleImage = {
      val grayscale = image.getGreyscale
      val width = image.getSize._2
      val height = image.getSize._1
@@ -17,19 +17,19 @@ class RotateFilter(degree: Int) extends Filter {
          for (i <- 0 until height; j <- 0 until width) {
            rotatedImage(j)(height - 1 - i) = grayscale(i)(j)
          }
-         new GrayscaleImage(width, height, rotatedImage)
+         new GreyscaleImage(width, height, rotatedImage)
        case -90 | 270 =>
          val rotatedImage = Array.ofDim[Int](width, height)
          for (i <- 0 until height; j <- 0 until width) {
            rotatedImage(width - 1 - j)(i) = grayscale(i)(j)
          }
-         new GrayscaleImage(width, height, rotatedImage)
+         new GreyscaleImage(width, height, rotatedImage)
        case 180 | -180 =>
          val rotatedImage = Array.ofDim[Int](height, width)
          for (i <- 0 until height; j <- 0 until width) {
            rotatedImage(height - 1 - i)(width - 1 - j) = grayscale(i)(j)
          }
-         new GrayscaleImage(height, width, rotatedImage)
+         new GreyscaleImage(height, width, rotatedImage)
        case _ => return image
      }
   }
