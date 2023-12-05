@@ -1,8 +1,8 @@
 package Console
-import Image.{Image, ImportedImage, EmptyImage, RandomImage}
+import Image.{EmptyImage, Image, ImportedImage, RandomImage}
 import Import.ImageImporter
-import Filter.{Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
-import Output.{ImageOutput, ImageOutputFile, ImageOutputConsole}
+import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
+import Output.{ImageOutput, ImageOutputConsole, ImageOutputFile}
 
 class InputHandler {
 
@@ -112,8 +112,43 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "brightness" =>
-            // TODO
+            if (i == (args.length - 1)) {
+              println("Invalid argument.")
+              return None
+            }
 
+            var brightnessInput: String = args.apply(i + 1)
+            var sign = '+'
+
+            if (brightnessInput(0) == '+' || brightnessInput(0) == '-') {
+              if (brightnessInput.length == 1) {
+                println("Invalid brightness value.")
+                return None
+              }
+              sign = brightnessInput(0)
+              brightnessInput = brightnessInput.drop(1)
+            }
+            else if (!brightnessInput(0).isDigit) {
+              println("Invalid brightness value.")
+              return None
+            }
+
+            for (char <- brightnessInput) {
+              if (!char.isDigit) {
+                println("Invalid brightness value.")
+                return None
+              }
+            }
+
+            var brightness = brightnessInput.toInt
+            if (sign == '-') {
+              brightness = 0 - brightness
+            }
+
+            val newFilter = new BrightnessFilter(brightness)
+            filters = filters :+ newFilter
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
           case "font-aspect-ratio" =>
             // TODO
 
