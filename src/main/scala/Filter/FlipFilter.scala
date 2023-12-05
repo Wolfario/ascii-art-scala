@@ -1,41 +1,41 @@
 package Filter
-import Image.{Image, ImportedImage}
+import Image.{Image, GrayscaleImage}
+
 import java.awt.image.BufferedImage
 class FlipFilter(axis: String) extends Filter {
 
-  override def apply(image: Image): Image = {
-    var flipImage: BufferedImage = image.get
+  override def apply(image: GrayscaleImage): GrayscaleImage = {
+    var flipImage: Array[Array[Int]] = image.getGreyscale
 
     if (axis(0) == 'x' && axis.length == 1) {
-      flipImage = flipX(image.getSize._2, image.getSize._1, image)
+      flipImage = flipX(image.getSize._2, image.getSize._1, image.getGreyscale)
     }
     else if (axis(0) == 'y' && axis.length == 1) {
-      flipImage = flipY(image.getSize._2, image.getSize._1, image)
+      flipImage = flipY(image.getSize._2, image.getSize._1, image.getGreyscale)
     }
     else {
-      println("Wrong flip axis.")
-      // TODO: Exception maybe
+      throw new Exception("Wrong flip axis.")
     }
-    new ImportedImage(image.getSize._1, image.getSize._2, flipImage)
+    new GrayscaleImage(image.getSize._1, image.getSize._2, flipImage)
   }
 
-  private def flipX(width: Int, height: Int, image: Image): BufferedImage = {
-    val newImage = new BufferedImage (width, height, image.get.getType)
+  private def flipX(width: Int, height: Int, image: Array[Array[Int]]): Array[Array[Int]] = {
+    val newImage = Array.ofDim[Int](height, width)
 
     for (y <- 0 until height) {
       for (x <- 0 until width) {
-        newImage.setRGB (x, y, image.get.getRGB(width - x - 1, y))
+        newImage(y)(x) = image(y)(width - x - 1)
     }
   }
     newImage
   }
 
-  private def flipY(width: Int, height: Int, image: Image): BufferedImage = {
-    val newImage = new BufferedImage(width, height, image.get.getType)
+  private def flipY(width: Int, height: Int, image: Array[Array[Int]]): Array[Array[Int]] = {
+    val newImage = Array.ofDim[Int](height, width)
 
     for (y <- 0 until height) {
       for (x <- 0 until width) {
-        newImage.setRGB(x, height - y - 1, image.get.getRGB(x, y))
+        newImage(y)(x) = image(height - y - 1)(x)
       }
     }
     newImage
