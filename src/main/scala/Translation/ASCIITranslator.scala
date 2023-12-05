@@ -1,7 +1,7 @@
 package Translation
 import java.awt.Color
-import Image.Image
-import Translation.Type.{Translation, LinearTranslation, NonLinearTranslation}
+import Image.{Image, SignImage}
+import Translation.Type.{LinearTranslation, NonLinearTranslation, Translation}
 
 class ASCIITranslator(Image: Image) {
 
@@ -52,10 +52,10 @@ class ASCIITranslator(Image: Image) {
     true
   }
 
-  def translate(): Array[Array[Char]] = {
+  def translate(): SignImage = {
     var greyscaleImage = this.calculateGreyscale(Image)
     var asciiImage = translationType.toASCII(greyscaleImage, characters)
-    asciiImage
+    new SignImage(Image.getSize._1, Image.getSize._2, Image.get, asciiImage)
   }
 
   def useLinearTranslation(): Unit = translationType = new LinearTranslation()
