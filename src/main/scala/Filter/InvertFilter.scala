@@ -1,30 +1,22 @@
 package Filter
-import Image.{Image, ImportedImage}
-import java.awt.image.BufferedImage
+import Image.GrayscaleImage
 
 class InvertFilter() extends Filter {
 
-  override def apply(image: Image): Image = {
+  override def apply(image: GrayscaleImage): GrayscaleImage = {
     val width = image.getSize._2
     val height = image.getSize._1
 
-    val invertedImage = new BufferedImage(width, height, image.get.getType)
+    val invertedImage = Array.ofDim[Int](height, width)
+    val grayscale = image.getGreyscale
 
     for (x <- 0 until width; y <- 0 until height) {
-      val pixel = image.get.getRGB(x, y)
+      val pixel = grayscale(y)(x)
 
-      val red = (pixel >> 16) & 0xFF
-      val green = (pixel >> 8) & 0xFF
-      val blue = pixel & 0xFF
-
-      val invertedRed = 255 - red
-      val invertedGreen = 255 - green
-      val invertedBlue = 255 - blue
-
-      val invertedPixel = (invertedRed << 16) | (invertedGreen << 8) | invertedBlue
-      invertedImage.setRGB(x, y, invertedPixel)
+      val invertedPixel = 255 - pixel
+      invertedImage(y)(x) = invertedPixel
     }
 
-    new ImportedImage(height, width, invertedImage)
+    new GrayscaleImage(height, width, invertedImage)
   }
 }
