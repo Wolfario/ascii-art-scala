@@ -106,6 +106,17 @@ class InputHandler {
 
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
+          case "scale" =>
+            if (i == (args.length - 1)) {
+              println("Invalid argument.")
+              return None
+            }
+
+            val newFilter = new ScaleFilter(args.apply(i + 1).toFloat)
+            filters = filters :+ newFilter
+
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
           case "brightness" =>
             // TODO
 
