@@ -5,7 +5,6 @@ import java.io.{File, PrintWriter}
 class ImageOutputFile(path: String) extends ImageOutput {
 
   if (!Files.exists(Paths.get(path))) {
-    println("wtf?")
     Files.createFile(Paths.get(path))
   }
 
