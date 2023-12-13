@@ -30,11 +30,8 @@ class InputHandler {
             nextParameterExistsCheck(i, args)
 
             val imageImporter = new ImageImporter()
-            val optionImage: Option[ImportedImage] = imageImporter.loadFrom(args.apply(i + 1))
-            if (imageImporter.loadFrom(args.apply(i + 1)).isEmpty) {
-              throw new Exception("Bad image path.")
-            }
-            image = optionImage.get
+            val optionImage: ImportedImage = imageImporter.loadFrom(args.apply(i + 1))
+            image = optionImage
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "image-random" =>
@@ -153,13 +150,13 @@ class InputHandler {
         mainArgument = true
     }
 
-    if (!outputCheck) {
-      println("[Console]: Operations were carried out without output.")
-    }
-
     // We need at least one image argument for correct working
     if (!emptyCheck) {
       throw new Exception("No arguments in input.")
+    }
+
+    if (!outputCheck) {
+      throw new Exception("Operations were carried out without output.")
     }
   }
 
