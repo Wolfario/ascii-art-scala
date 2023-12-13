@@ -1,5 +1,5 @@
 package Application
-import Output.ImageOutput
+import Output.{ImageOutputEmpty, ImageOutput}
 import Translation.{GreyscaleASCIITranslator, GreyscaleFilterTranslator, GreyscaleTranslator}
 import Image.{EmptyImage, Image}
 import Filter.Filter
@@ -7,7 +7,7 @@ import Filter.Filter
 class Application {
 
   private var image: Image = new EmptyImage
-  private var output: Option[ImageOutput] = None
+  private var output: ImageOutput = new ImageOutputEmpty
   private var filters: List[Filter] = List()
 
   def setImage(newImage: Image): Unit = {
@@ -19,7 +19,7 @@ class Application {
   }
 
   def setOutput(newOutput: ImageOutput): Unit = {
-    output = Some(newOutput)
+    output = newOutput
   }
 
   def handle(): Unit = {
@@ -31,8 +31,8 @@ class Application {
     asciiTranslator.choiceKnownTable("standard")
     val asciiArray: Array[Array[Char]] = asciiTranslator.translate()
 
-    output.get.set(asciiArray)
-    output.get.output()
+    output.set(asciiArray)
+    output.output()
   }
 
   private def checkAllModulesPrepared(): Unit = {

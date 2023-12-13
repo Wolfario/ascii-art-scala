@@ -2,13 +2,13 @@ package Console
 import Image.{EmptyImage, Image, ImportedImage, RandomImage}
 import Import.ImageImporter
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
-import Output.{ImageOutput, ImageOutputConsole, ImageOutputFile}
+import Output.{ImageOutputEmpty, ImageOutput, ImageOutputConsole, ImageOutputFile}
 
 class InputHandler {
 
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
-  private var output: Option[ImageOutput] = None
+  private var output: ImageOutput = new ImageOutputEmpty
   def handle(args: Array[String]): Unit = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
@@ -131,14 +131,14 @@ class InputHandler {
 
           case "output-console" =>
             outputCheck = true
-            output = Some(new ImageOutputConsole())
+            output = new ImageOutputConsole()
           case "output-file" =>
             nextParameterExistsCheck(i, args)
 
             outputCheck = true
             val path = args.apply(i + 1)
             try {
-              output = Some(new ImageOutputFile(path))
+              output = new ImageOutputFile(path)
             } catch {
               case e: Exception =>
                 throw new Exception("Invalid output path.")
@@ -167,7 +167,7 @@ class InputHandler {
 
   def getFilters: List[Filter] = filters
 
-  def getOutput: Option[ImageOutput] = output
+  def getOutput: ImageOutput = output
 
   private def nextParameterExistsCheck(i: Int, args: Array[String]): Unit = {
     if (i == (args.length - 1)) {
