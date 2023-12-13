@@ -9,7 +9,7 @@ class InputHandler {
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
   private var output: Option[ImageOutput] = None
-  def handle(args: Array[String]): Option[Boolean] = {
+  def handle(args: Array[String]): Unit = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
     var emptyCheck: Boolean = false
@@ -20,24 +20,19 @@ class InputHandler {
       if (mainArgument) {
         // Arguments must come in pairs, where the first argument must begin with "--"
         if (arg.length() <= 2 || !(arg.charAt(0) == '-' && arg.charAt(1) == '-')) {
-          println("Invalid argument.")
-          return None
+          throw new Exception("Invalid argument.")
         }
 
       val methodName = arg.substring(2)
         methodName match {
           case "image" =>
             emptyCheck = true
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
 
             val imageImporter = new ImageImporter()
             val optionImage: Option[ImportedImage] = imageImporter.loadFrom(args.apply(i + 1))
             if (imageImporter.loadFrom(args.apply(i + 1)).isEmpty) {
-              println("Invalid argument.")
-              return None
+              throw new Exception("Bad image path.")
             }
             image = optionImage.get
             // In next iteration will be method value, so we need to skip it
@@ -49,31 +44,25 @@ class InputHandler {
 
             image = new RandomImage(default_height, default_width)
           case "rotate" =>
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
 
             var rotateInput: String = args.apply(i + 1)
             var sign = '+'
 
             if (rotateInput(0) == '+' || rotateInput(0) == '-') {
               if (rotateInput.length == 1) {
-                println("Invalid rotate value.")
-                return None
+                throw new Exception("Invalid rotate value.")
               }
               sign = rotateInput(0)
               rotateInput = rotateInput.drop(1)
             }
             else if (!rotateInput(0).isDigit) {
-              println("Invalid rotate value.")
-              return None
+              throw new Exception("Invalid rotate value.")
             }
 
             for (char <- rotateInput) {
               if (!char.isDigit) {
-                println("Invalid rotate value.")
-                return None
+                throw new Exception("Invalid rotate value.")
               }
             }
 
@@ -90,10 +79,7 @@ class InputHandler {
             val newFilter = new InvertFilter()
             filters = filters :+ newFilter
           case "flip" =>
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
 
             val newFilter = new FlipFilter(args.apply(i + 1))
             filters = filters :+ newFilter
@@ -101,10 +87,7 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "scale" =>
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
 
             val newFilter = new ScaleFilter(args.apply(i + 1).toFloat)
             filters = filters :+ newFilter
@@ -112,31 +95,25 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "brightness" =>
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
 
             var brightnessInput: String = args.apply(i + 1)
             var sign = '+'
 
             if (brightnessInput(0) == '+' || brightnessInput(0) == '-') {
               if (brightnessInput.length == 1) {
-                println("Invalid brightness value.")
-                return None
+                throw new Exception("Invalid brightness value.")
               }
               sign = brightnessInput(0)
               brightnessInput = brightnessInput.drop(1)
             }
             else if (!brightnessInput(0).isDigit) {
-              println("Invalid brightness value.")
-              return None
+              throw new Exception("Invalid brightness value.")
             }
 
             for (char <- brightnessInput) {
               if (!char.isDigit) {
-                println("Invalid brightness value.")
-                return None
+                throw new Exception("Invalid brightness value.")
               }
             }
 
@@ -156,24 +133,20 @@ class InputHandler {
             outputCheck = true
             output = Some(new ImageOutputConsole())
           case "output-file" =>
-            if (i == (args.length - 1)) {
-              println("Invalid argument.")
-              return None
-            }
+            nextParameterExistsCheck(i, args)
+
             outputCheck = true
             val path = args.apply(i + 1)
             try {
               output = Some(new ImageOutputFile(path))
             } catch {
               case e: Exception =>
-                println("Invalid output path.")
-                return None
+                throw new Exception("Invalid output path.")
             }
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case other =>
-            println("Invalid argument.")
-            return None
+            throw new Exception("Invalid argument.")
         }
       }
       else
@@ -181,15 +154,13 @@ class InputHandler {
     }
 
     if (!outputCheck) {
-      println("Operations were carried out without output.")
+      println("[Console]: Operations were carried out without output.")
     }
 
     // We need at least one image argument for correct working
     if (!emptyCheck) {
-      println("No arguments in input.")
-      None
+      throw new Exception("No arguments in input.")
     }
-    Some(true)
   }
 
   def getImage: Image = image
@@ -197,5 +168,11 @@ class InputHandler {
   def getFilters: List[Filter] = filters
 
   def getOutput: Option[ImageOutput] = output
+
+  private def nextParameterExistsCheck(i: Int, args: Array[String]): Unit = {
+    if (i == (args.length - 1)) {
+      throw new Exception("Invalid argument.")
+    }
+  }
 
 }
