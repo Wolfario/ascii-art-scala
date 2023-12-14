@@ -1,5 +1,4 @@
 package Image
-import Image.Image
 import java.awt.image.BufferedImage
 
 class ImportedImage(height: Int, width: Int, image: BufferedImage) extends Image {
