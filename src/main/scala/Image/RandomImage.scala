@@ -24,10 +24,7 @@ class RandomImage(height: Int, width: Int) extends Image {
     }
     returnImage
   }
-  override def get: BufferedImage = generateImage
+  override def get: BufferedImage = image
 
   override def getSize: (Int, Int) = (height, width)
-
-
-
 }
