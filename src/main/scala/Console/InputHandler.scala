@@ -86,8 +86,13 @@ class InputHandler {
           case "scale" =>
             nextParameterExistsCheck(i, args)
 
-            val newFilter = new ScaleFilter(args.apply(i + 1).toFloat)
-            filters = filters :+ newFilter
+            try {
+              val newFilter = new ScaleFilter(args.apply(i + 1).toFloat)
+              filters = filters :+ newFilter
+            } catch {
+              case e: Exception =>
+                throw new Exception("Invalid scale value.")
+            }
 
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
