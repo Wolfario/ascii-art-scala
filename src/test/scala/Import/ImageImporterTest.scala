@@ -1,9 +1,6 @@
 package Import
 import org.scalatest.FunSuite
-import java.awt.image.BufferedImage
-import java.io.File
-import javax.imageio.ImageIO
-import Image.{Image, ImportedImage}
+import Image.Image
 
 
 class ImageImporterTest extends FunSuite {
