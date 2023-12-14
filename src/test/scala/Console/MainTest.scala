@@ -1,10 +1,10 @@
-package MainTest
+package Console
 
 import org.scalatest.FunSuite
 
 
 class MainTest extends FunSuite {
-  test("Foo"){
-
+  test("Zero test"){
+    assert(0 == 0)
   }
 }
