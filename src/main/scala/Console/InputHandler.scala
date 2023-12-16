@@ -1,6 +1,6 @@
 package Console
 import Image.{EmptyImage, Image, ImportedImage, RandomImage}
-import Import.ImageImporter
+import Import.ImageImporterImageIO
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
 import Output.{ImageOutputEmpty, ImageOutput, ImageOutputConsole, ImageOutputFile}
 
@@ -29,7 +29,7 @@ class InputHandler {
             emptyCheck = true
             nextParameterExistsCheck(i, args)
 
-            val imageImporter = new ImageImporter()
+            val imageImporter = new ImageImporterImageIO()
             val optionImage: ImportedImage = imageImporter.loadFrom(args.apply(i + 1))
             image = optionImage
             // In next iteration will be method value, so we need to skip it
