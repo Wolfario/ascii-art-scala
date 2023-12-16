@@ -1,6 +1,6 @@
 package Filter
 import Image.GreyscaleImage
-import Import.ImageImporter
+import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite
 
@@ -15,7 +15,7 @@ class ScaleFilterTest extends FunSuite {
   }
 
   test("Applying scale filter twice to 4.0 and 0.25 (compare sizes).") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
     val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
     val greyscale = greyscaler.translate()
 

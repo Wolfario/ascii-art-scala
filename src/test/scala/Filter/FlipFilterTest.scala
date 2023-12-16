@@ -1,6 +1,6 @@
 package Filter
 import Image.GreyscaleImage
-import Import.ImageImporter
+import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite
 
@@ -16,7 +16,7 @@ class FlipFilterTest extends FunSuite {
 
   test("Applying flip filter with wrong axis value.") {
     var exception = intercept[Exception] {
-      val importer = new ImageImporter
+      val importer = new ImageImporterImageIO
       val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
       val greyscale = greyscaler.translate()
 
@@ -27,7 +27,7 @@ class FlipFilterTest extends FunSuite {
     assert(exception.getMessage == "Wrong flip axis.")
 
     exception = intercept[Exception] {
-      val importer = new ImageImporter
+      val importer = new ImageImporterImageIO
       val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
       val greyscale = greyscaler.translate()
 

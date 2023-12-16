@@ -1,6 +1,6 @@
 package Filter
 import Image.GreyscaleImage
-import Import.ImageImporter
+import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite
 
@@ -14,7 +14,7 @@ class InvertFilterTest extends FunSuite {
   }
 
   test("Applying invert twice in a row.") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
     val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
     val greyscale = greyscaler.translate()
 
