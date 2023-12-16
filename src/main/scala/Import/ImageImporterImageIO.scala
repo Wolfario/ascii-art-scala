@@ -6,7 +6,7 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import javax.imageio.ImageIO
 
-class ImageImporter() {
+class ImageImporterImageIO() extends ImageImporter {
 
   def loadFrom(path: String): ImportedImage = {
     try {
