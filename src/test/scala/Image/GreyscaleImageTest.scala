@@ -1,11 +1,11 @@
 package Image
-import Import.ImageImporter
+import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite
 
 class GreyscaleImageTest extends FunSuite {
   test("Comparing two objects of the same file") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
 
     val image1: ImportedImage = importer.loadFrom("testfiles/reflexed_cowboys.jpg")
     val image2: ImportedImage = importer.loadFrom("testfiles/reflexed_cowboys_copy.jpg")
@@ -21,7 +21,7 @@ class GreyscaleImageTest extends FunSuite {
   }
 
   test("Comparing two objects of different files") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
 
     val image1: ImportedImage = importer.loadFrom("testfiles/reflexed_cowboys.jpg")
     val image2: ImportedImage = importer.loadFrom("testfiles/bunny.png")

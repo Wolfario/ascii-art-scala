@@ -3,11 +3,11 @@ import org.scalatest.FunSuite
 import Image.Image
 
 
-class ImageImporterTest extends FunSuite {
+class ImageImporterImageIOTest extends FunSuite {
 
   test("Wrong path import") {
     val exception = intercept[Exception] {
-      val importer = new ImageImporter
+      val importer = new ImageImporterImageIO
       val response: Image = importer.loadFrom("bzz bzz")
     }
 
@@ -16,7 +16,7 @@ class ImageImporterTest extends FunSuite {
 
   test("Not an image file opening error") {
     val exception = intercept[Exception] {
-      val importer = new ImageImporter
+      val importer = new ImageImporterImageIO
       val response: Image = importer.loadFrom("testfiles/not_an_image.png")
     }
 
@@ -24,12 +24,12 @@ class ImageImporterTest extends FunSuite {
   }
 
   test("JPG file opening") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
     val response: Image = importer.loadFrom("testfiles/reflexed_cowboys.jpg")
   }
 
   test("PNG file opening") {
-    val importer = new ImageImporter
+    val importer = new ImageImporterImageIO
     val response: Image = importer.loadFrom("testfiles/bunny.png")
   }
 }
