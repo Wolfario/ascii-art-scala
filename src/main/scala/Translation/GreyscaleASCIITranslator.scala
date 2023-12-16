@@ -11,7 +11,7 @@ class GreyscaleASCIITranslator(image: GreyscaleImage) extends Translator[Array[A
   def choiceKnownTable(table_name: String): Unit = {
     table_name match {
       case "standard" =>
-        input = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+        input = ".'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
       case "ten_levels" =>
         input = " .:-=+*#%@"
       case _ =>
