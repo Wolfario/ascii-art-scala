@@ -9,6 +9,9 @@ class InputHandler {
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
   private var output: ImageOutput = new ImageOutputEmpty
+  private var predefineTableName: String = "standard"
+  private var customTable: String = ""
+  private var predefineTableUses: Boolean = true
   def handle(args: Array[String]): Unit = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
@@ -147,6 +150,24 @@ class InputHandler {
             }
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
+          case "table" =>
+            nextParameterExistsCheck(i, args)
+
+            predefineTableUses = true
+            predefineTableName = args.apply(i + 1)
+            customTable = ""
+
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
+          case "custom-table" =>
+            nextParameterExistsCheck(i, args)
+
+            predefineTableUses = false
+            predefineTableName = "standard"
+            customTable = args.apply(i + 1)
+
+            // In next iteration will be method value, so we need to skip it
+            mainArgument = false
           case other =>
             throw new Exception("Invalid argument.")
         }
@@ -170,6 +191,13 @@ class InputHandler {
   def getFilters: List[Filter] = filters
 
   def getOutput: ImageOutput = output
+
+  def getTable: (Boolean, String) = {
+    if (predefineTableUses) {
+      return (true, predefineTableName)
+    }
+    (false, customTable)
+  }
 
   private def nextParameterExistsCheck(i: Int, args: Array[String]): Unit = {
     if (i == (args.length - 1)) {
