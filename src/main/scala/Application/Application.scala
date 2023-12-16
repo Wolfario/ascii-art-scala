@@ -12,6 +12,7 @@ class Application {
   private var predefineTableName: String = "standard"
   private var customTable: String = ""
   private var predefineTableUses: Boolean = true
+  private var linearTranslation: Boolean = true
 
   def setImage(newImage: Image): Unit = {
     image = newImage
@@ -38,12 +39,28 @@ class Application {
     }
   }
 
+  def setTranslationType(linear: Boolean): Unit = {
+    if (linear) {
+      linearTranslation = true
+    }
+    else {
+      linearTranslation = false
+    }
+  }
+
   def handle(): Unit = {
     val greyscaleTranslator = new GreyscaleTranslator(image)
 
     val greyscaleFilterTranslator = new GreyscaleFilterTranslator(greyscaleTranslator.translate(), filters)
 
     val asciiTranslator = new GreyscaleASCIITranslator(greyscaleFilterTranslator.translate())
+
+    if (linearTranslation) {
+      asciiTranslator.useLinearTranslation()
+    }
+    else {
+      asciiTranslator.useNonLinearTranslation()
+    }
 
     if (predefineTableUses) {
       asciiTranslator.choiceKnownTable(predefineTableName)

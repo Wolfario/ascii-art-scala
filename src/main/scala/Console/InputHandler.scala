@@ -10,8 +10,9 @@ class InputHandler {
   private var filters: List[Filter] = List()
   private var output: ImageOutput = new ImageOutputEmpty
   private var predefineTableName: String = "standard"
-  private var customTable: String = ""
+  private var customTableInput: String = ""
   private var predefineTableUses: Boolean = true
+  private var linearTranslation: Boolean = true
   def handle(args: Array[String]): Unit = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
@@ -155,7 +156,7 @@ class InputHandler {
 
             predefineTableUses = true
             predefineTableName = args.apply(i + 1)
-            customTable = ""
+            customTableInput = ""
 
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
@@ -164,10 +165,14 @@ class InputHandler {
 
             predefineTableUses = false
             predefineTableName = "standard"
-            customTable = args.apply(i + 1)
+            customTableInput = args.apply(i + 1)
 
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
+          case "use-linear" =>
+            linearTranslation = true
+          case "use-non-linear" =>
+            linearTranslation = false
           case other =>
             throw new Exception("Invalid argument.")
         }
@@ -196,8 +201,10 @@ class InputHandler {
     if (predefineTableUses) {
       return (true, predefineTableName)
     }
-    (false, customTable)
+    (false, customTableInput)
   }
+
+  def getTranslationType: Boolean = linearTranslation
 
   private def nextParameterExistsCheck(i: Int, args: Array[String]): Unit = {
     if (i == (args.length - 1)) {
