@@ -1,49 +1,38 @@
 package Translation
-import java.awt.Color
-import Filter.Filter
-import Image.{Image, GreyscaleImage}
-import Translation.Type.{LinearASCIITranslation, NonLinearASCIITranslation, ASCIITranslation}
+import Image.GreyscaleImage
+import Translation.Type.{ASCIITranslation, LinearASCIITranslation, NonLinearASCIITranslation}
 
 class GreyscaleASCIITranslator(image: GreyscaleImage) extends Translator[Array[Array[Char]]] {
 
   // Linear translation set as default
   private var translationType: ASCIITranslation = new LinearASCIITranslation()
-  private var characters: List[Char] = List()
-  private var filters: List[Filter] = List()
+  private var input: String = ""
 
-  def choiceKnownTable(table_name: String): Boolean = {
-    characters = List()
-
+  def choiceKnownTable(table_name: String): Unit = {
     table_name match {
       case "standard" =>
-        var table = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
-        for (char <- table) {
-          characters = characters :+ char
-        }
-        true
+        input = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+      case "ten_levels" =>
+        input = " .:-=+*#%@"
       case _ =>
-        println("Unknown character table")
-        false
+        throw new Exception("Unknown character table.")
     }
   }
 
-  def choiceTable(table: String): Boolean = {
-    characters = List()
-    for (char <- table) {
-      characters = characters :+ char
+  def choiceTable(funcInput: String): Unit = {
+    if (funcInput.isEmpty) {
+      throw new Exception("Empty character table is not valid table.")
     }
-    true
-  }
 
-  def setFilters(inFilters: List[Filter]): Unit = filters = inFilters
+    input = funcInput
+  }
 
   def translate(): Array[Array[Char]] = {
-    var asciiImage = translationType.toASCII(image.getGreyscale, characters)
+    val asciiImage = translationType.toASCII(image.getGreyscale, input)
     asciiImage
   }
 
   def useLinearTranslation(): Unit = translationType = new LinearASCIITranslation()
 
   def useNonLinearTranslation(): Unit = translationType = new NonLinearASCIITranslation()
-
 }

@@ -1,21 +1,17 @@
 package Translation.Type
-import Image.Image
 
-class LinearTranslation extends Translation {
+class LinearASCIITranslation() extends ASCIITranslation {
 
-  override def toASCII(greyscaleImage: Array[Array[Int]], characters: List[Char]): Array[Array[Char]] = {
-    var range = 255f / characters.length.toFloat
-    val asciiReturn: Array[Array[Char]] = greyscaleImage.map {
-      row =>
-        row.map {
-          pixelValue =>
-            var char_index = (pixelValue / range).floor.toInt
-            if (char_index >= characters.length) {
-              char_index = characters.length - 1
-            }
-            characters(char_index)
-      }
-    }
-    asciiReturn
+  override def toASCII(greyscaleImage: Array[Array[Int]], input: String): Array[Array[Char]] = {
+    if (!areAllCharactersUnique(input))
+      throw new Exception("Symbols in character table are not unique or you have chosen wrong translation mode.")
+
+    val characters = input.toList
+    distributeToASCII(greyscaleImage, characters)
+  }
+
+  private def areAllCharactersUnique(inputString: String): Boolean = {
+    val uniqueChars = inputString.toSet
+    uniqueChars.size == inputString.length
   }
 }
