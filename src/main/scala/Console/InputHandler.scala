@@ -133,8 +133,25 @@ class InputHandler {
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "font-aspect-ratio" =>
-            // TODO
+            nextParameterExistsCheck(i, args)
 
+            try {
+              val ratio = args.apply(i + 1)
+              val keyValuePairs = ratio.split(":")
+
+              if (keyValuePairs.length != 2) {
+                throw new Exception()
+              }
+
+              val fontAspectRatio = (keyValuePairs(1).toInt, keyValuePairs(0).toInt)
+              val newFilter = new FontFilter(fontAspectRatio)
+              filters = filters :+ newFilter
+              // In next iteration will be method value, so we need to skip it
+              mainArgument = false
+            } catch {
+              case e: Exception =>
+                throw new Exception("Invalid aspect ratio value.")
+            }
           case "output-console" =>
             outputCheck = true
             output = new ImageOutputConsole()
