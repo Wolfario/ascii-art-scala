@@ -2,13 +2,13 @@ package Console
 import Image.{EmptyImage, Image, ImportedImage, RandomImage}
 import Import.ImageImporterImageIO
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
-import Output.{ImageOutputEmpty, ImageOutput, ImageOutputConsole, ImageOutputFile}
+import Output.{ASCIIOutputEmpty, ASCIIOutput, ASCIIOutputConsole, ASCIIOutputFile}
 
 class InputHandler {
 
   private var image: Image = new EmptyImage
   private var filters: List[Filter] = List()
-  private var output: ImageOutput = new ImageOutputEmpty
+  private var output: ASCIIOutput = new ASCIIOutputEmpty
   private var predefineTableName: String = "standard"
   private var customTableInput: String = ""
   private var predefineTableUses: Boolean = true
@@ -154,14 +154,14 @@ class InputHandler {
             }
           case "output-console" =>
             outputCheck = true
-            output = new ImageOutputConsole()
+            output = new ASCIIOutputConsole()
           case "output-file" =>
             nextParameterExistsCheck(i, args)
 
             outputCheck = true
             val path = args.apply(i + 1)
             try {
-              output = new ImageOutputFile(path)
+              output = new ASCIIOutputFile(path)
             } catch {
               case e: Exception =>
                 throw new Exception("Invalid output path.")
@@ -212,7 +212,7 @@ class InputHandler {
 
   def getFilters: List[Filter] = filters
 
-  def getOutput: ImageOutput = output
+  def getOutput: ASCIIOutput = output
 
   def getTable: (Boolean, String) = {
     if (predefineTableUses) {

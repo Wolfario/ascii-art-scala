@@ -1,5 +1,5 @@
 package Application
-import Output.{ImageOutputEmpty, ImageOutput}
+import Output.{ASCIIOutputEmpty, ASCIIOutput}
 import Translation.{GreyscaleASCIITranslator, GreyscaleFilterTranslator, GreyscaleTranslator}
 import Image.{EmptyImage, Image}
 import Filter.Filter
@@ -7,7 +7,7 @@ import Filter.Filter
 class Application {
 
   private var image: Image = new EmptyImage
-  private var output: ImageOutput = new ImageOutputEmpty
+  private var output: ASCIIOutput = new ASCIIOutputEmpty
   private var filters: List[Filter] = List()
   private var predefineTableName: String = "standard"
   private var customTable: String = ""
@@ -22,7 +22,7 @@ class Application {
     filters = newFilters
   }
 
-  def setOutput(newOutput: ImageOutput): Unit = {
+  def setOutput(newOutput: ASCIIOutput): Unit = {
     output = newOutput
   }
 

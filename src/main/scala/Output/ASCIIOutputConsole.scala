@@ -1,6 +1,6 @@
 package Output
 
-class ImageOutputConsole() extends ImageOutput {
+class ASCIIOutputConsole() extends ASCIIOutput {
 
   private var image: Array[Array[Char]] = Array.empty
 

@@ -1,6 +1,6 @@
 package Output
 
-class ImageOutputEmpty extends ImageOutput {
+class ASCIIOutputEmpty extends ASCIIOutput {
 
   override def set(newImage: Array[Array[Char]]): Unit = {
     throw new Exception("Cannot use empty output methods. Set correct output.")

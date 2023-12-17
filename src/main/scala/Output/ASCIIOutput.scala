@@ -1,6 +1,6 @@
 package Output
 
-trait ImageOutput {
+trait ASCIIOutput {
 
   def output(): Unit
 

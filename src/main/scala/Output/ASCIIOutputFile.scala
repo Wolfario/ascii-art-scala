@@ -2,7 +2,7 @@ package Output
 import java.nio.file.{Files, Paths}
 import java.io.{File, PrintWriter}
 
-class ImageOutputFile(path: String) extends ImageOutput {
+class ASCIIOutputFile(path: String) extends ASCIIOutput {
 
   if (!Files.exists(Paths.get(path))) {
     Files.createFile(Paths.get(path))
