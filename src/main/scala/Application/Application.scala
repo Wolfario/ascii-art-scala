@@ -1,8 +1,8 @@
 package Application
-import Output.{ASCIIOutput, ASCIIOutputEmpty}
 import Translation.{GreyscaleASCIITranslator, GreyscaleFilterTranslator, GreyscaleTranslator}
 import Filter.Filter
 import Image.ImageRGB.{EmptyImage, ImageRGB}
+import Output.ASCII.{ASCIIOutput, ASCIIOutputEmpty}
 
 class Application {
 

@@ -1,8 +1,8 @@
 package Console
 import Import.ImageImporterImageIO
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
+import Output.ASCII.{ASCIIOutput, ASCIIOutputConsole, ASCIIOutputEmpty, ASCIIOutputFile}
 import _root_.Image.ImageRGB.{EmptyImage, ImageRGB, ImportedImage, RandomImage}
-import Output.{ASCIIOutput, ASCIIOutputConsole, ASCIIOutputEmpty, ASCIIOutputFile}
 
 class InputHandler {
 
