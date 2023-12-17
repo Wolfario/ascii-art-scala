@@ -1,12 +1,12 @@
 package Application
-import Output.{ASCIIOutputEmpty, ASCIIOutput}
+import Output.{ASCIIOutput, ASCIIOutputEmpty}
 import Translation.{GreyscaleASCIITranslator, GreyscaleFilterTranslator, GreyscaleTranslator}
-import Image.{EmptyImage, Image}
 import Filter.Filter
+import Image.ImageRGB.{EmptyImage, ImageRGB}
 
 class Application {
 
-  private var image: Image = new EmptyImage
+  private var image: ImageRGB = new EmptyImage
   private var output: ASCIIOutput = new ASCIIOutputEmpty
   private var filters: List[Filter] = List()
   private var predefineTableName: String = "standard"
@@ -14,7 +14,7 @@ class Application {
   private var predefineTableUses: Boolean = true
   private var linearTranslation: Boolean = true
 
-  def setImage(newImage: Image): Unit = {
+  def setImage(newImage: ImageRGB): Unit = {
     image = newImage
   }
 
@@ -73,9 +73,5 @@ class Application {
 
     output.set(asciiArray)
     output.output()
-  }
-
-  private def checkAllModulesPrepared(): Unit = {
-    // TODO: Throw exceptions when all modules wasn't set
   }
 }

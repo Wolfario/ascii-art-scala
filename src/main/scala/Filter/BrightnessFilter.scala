@@ -9,7 +9,7 @@ class BrightnessFilter(brightness: Int) extends Filter {
     val destImage = Array.ofDim[Int](height, width)
 
     for (x <- 0 until width; y <- 0 until height) {
-      var newBrightness = image.getGreyscale(y)(x) + brightness
+      var newBrightness = image.get(y)(x) + brightness
       if (newBrightness < 0) newBrightness = 0
       if (newBrightness > 255) newBrightness = 255
       destImage(y)(x) = newBrightness

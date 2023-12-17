@@ -29,7 +29,7 @@ class ScaleFilter(coefficient: Float) extends Filter {
       val srcX = x * 4
       val srcY = y * 4
 
-      destImage(y)(x) = image.getGreyscale(srcY)(srcX)
+      destImage(y)(x) = image.get(srcY)(srcX)
     }
     new GreyscaleImage(destHeight, destWidth, destImage)
 }
@@ -46,7 +46,7 @@ class ScaleFilter(coefficient: Float) extends Filter {
       val srcY = y * 4
 
       for (i <- 0 until 4; j <- 0 until 4) {
-        destImage(srcY + i)(srcX + j) = image.getGreyscale(y)(x)
+        destImage(srcY + i)(srcX + j) = image.get(y)(x)
       }
     }
     new GreyscaleImage(destHeight, destWidth, destImage)

@@ -28,7 +28,7 @@ class GreyscaleASCIITranslator(image: GreyscaleImage) extends Translator[Array[A
   }
 
   def translate(): Array[Array[Char]] = {
-    val asciiImage = translationType.toASCII(image.getGreyscale, input)
+    val asciiImage = translationType.toASCII(image.get, input)
     asciiImage
   }
 

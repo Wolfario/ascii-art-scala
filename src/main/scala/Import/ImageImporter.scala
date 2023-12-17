@@ -1,5 +1,6 @@
 package Import
-import Image.ImportedImage
+
+import Image.ImageRGB.ImportedImage
 
 trait ImageImporter[T] {
 

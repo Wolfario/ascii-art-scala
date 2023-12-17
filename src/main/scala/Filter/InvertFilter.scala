@@ -8,7 +8,7 @@ class InvertFilter() extends Filter {
     val height = image.getSize._1
 
     val invertedImage = Array.ofDim[Int](height, width)
-    val grayscale = image.getGreyscale
+    val grayscale = image.get
 
     for (x <- 0 until width; y <- 0 until height) {
       val pixel = grayscale(y)(x)

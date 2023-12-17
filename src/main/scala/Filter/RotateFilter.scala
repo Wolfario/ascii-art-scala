@@ -7,7 +7,7 @@ class RotateFilter(degree: Int) extends Filter {
   }
 
    override def apply(image: GreyscaleImage): GreyscaleImage = {
-     val grayscale = image.getGreyscale
+     val grayscale = image.get
      val width = image.getSize._2
      val height = image.getSize._1
 
@@ -30,7 +30,7 @@ class RotateFilter(degree: Int) extends Filter {
            rotatedImage(height - 1 - i)(width - 1 - j) = grayscale(i)(j)
          }
          new GreyscaleImage(height, width, rotatedImage)
-       case _ => return image
+       case _ => image
      }
   }
 }

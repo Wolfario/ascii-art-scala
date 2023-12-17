@@ -1,5 +1,6 @@
 package Import
-import Image.ImportedImage
+
+import Image.ImageRGB.ImportedImage
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.FileNotFoundException

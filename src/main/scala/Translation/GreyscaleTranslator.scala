@@ -1,9 +1,9 @@
 package Translation
 import java.awt.Color
-import Filter.Filter
-import Image.{Image, GreyscaleImage}
+import Image.GreyscaleImage
+import Image.ImageRGB.ImageRGB
 
-class GreyscaleTranslator(image: Image) extends Translator[GreyscaleImage] {
+class GreyscaleTranslator(image: ImageRGB) extends Translator[GreyscaleImage] {
 
   override def translate(): GreyscaleImage = {
     val width = image.getSize._2

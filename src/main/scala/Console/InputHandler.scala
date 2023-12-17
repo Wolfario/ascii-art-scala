@@ -1,12 +1,12 @@
 package Console
-import Image.{EmptyImage, Image, ImportedImage, RandomImage}
 import Import.ImageImporterImageIO
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
-import Output.{ASCIIOutputEmpty, ASCIIOutput, ASCIIOutputConsole, ASCIIOutputFile}
+import _root_.Image.ImageRGB.{EmptyImage, ImageRGB, ImportedImage, RandomImage}
+import Output.{ASCIIOutput, ASCIIOutputConsole, ASCIIOutputEmpty, ASCIIOutputFile}
 
 class InputHandler {
 
-  private var image: Image = new EmptyImage
+  private var imageRGB: ImageRGB = new EmptyImage
   private var filters: List[Filter] = List()
   private var output: ASCIIOutput = new ASCIIOutputEmpty
   private var predefineTableName: String = "standard"
@@ -35,15 +35,15 @@ class InputHandler {
 
             val imageImporter = new ImageImporterImageIO()
             val optionImage: ImportedImage = imageImporter.loadFrom(args.apply(i + 1))
-            image = optionImage
+            imageRGB = optionImage
             // In next iteration will be method value, so we need to skip it
             mainArgument = false
           case "image-random" =>
             emptyCheck = true
-            var default_height = 384
-            var default_width = 512
+            val default_height = 384
+            val default_width = 512
 
-            image = new RandomImage(default_height, default_width)
+            imageRGB = new RandomImage(default_height, default_width)
           case "rotate" =>
             nextParameterExistsCheck(i, args)
 
@@ -208,7 +208,7 @@ class InputHandler {
     }
   }
 
-  def getImage: Image = image
+  def getImage: ImageRGB = imageRGB
 
   def getFilters: List[Filter] = filters
 

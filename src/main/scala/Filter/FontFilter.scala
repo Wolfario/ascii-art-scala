@@ -15,7 +15,7 @@ class FontFilter(fontAspectRatio: (Int, Int)) extends Filter {
     } {
       val newI = i * fontHeight / fontWidth
       if (newI < newHeight) {
-        newGreyscaleImage(newI)(j) = image.getGreyscale(i)(j)
+        newGreyscaleImage(newI)(j) = image.get(i)(j)
       }
     }
 
