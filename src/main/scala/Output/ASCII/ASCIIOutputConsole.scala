@@ -1,4 +1,4 @@
-package Output
+package Output.ASCII
 
 class ASCIIOutputConsole() extends ASCIIOutput {
 

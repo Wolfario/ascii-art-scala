@@ -1,6 +1,7 @@
-package Output
-import java.nio.file.{Files, Paths}
+package Output.ASCII
+
 import java.io.{File, PrintWriter}
+import java.nio.file.{Files, Paths}
 
 class ASCIIOutputFile(path: String) extends ASCIIOutput {
 
