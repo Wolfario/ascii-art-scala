@@ -2,8 +2,12 @@ package Console
 import Import.ImageImporterImageIO
 import Filter.{BrightnessFilter, Filter, FlipFilter, FontFilter, InvertFilter, RotateFilter, ScaleFilter}
 import Output.ASCII.{ASCIIOutput, ASCIIOutputConsole, ASCIIOutputEmpty, ASCIIOutputFile}
-import _root_.Image.ImageRGB.{EmptyImage, ImageRGB, ImportedImage, RandomImage}
+import Image.ImageRGB.{EmptyImage, ImageRGB, ImportedImage, RandomImage}
 
+/**
+ * The `InputHandler` class manages the processing of command-line arguments
+ * and configuration for image manipulation operations.
+ */
 class InputHandler {
 
   private var imageRGB: ImageRGB = new EmptyImage
@@ -13,6 +17,13 @@ class InputHandler {
   private var customTableInput: String = ""
   private var predefineTableUses: Boolean = true
   private var linearTranslation: Boolean = true
+
+  /**
+   * Handles the command-line arguments and configures the `InputHandler` accordingly.
+   *
+   * @param args An array of command-line arguments.
+   * @throws Exception if there is an issue with the provided arguments or their values.
+   */
   def handle(args: Array[String]): Unit = {
     // We need to skip method values if it needs. Initially we are waiting for method name (reason of initial true value)
     var mainArgument: Boolean = true
@@ -208,12 +219,33 @@ class InputHandler {
     }
   }
 
+  /**
+   * Retrieves the currently set image for processing.
+   *
+   * @return The current image in RGB format.
+   */
   def getImage: ImageRGB = imageRGB
 
+  /**
+   * Retrieves the list of filters to be applied to the image.
+   *
+   * @return A list of filter objects.
+   */
   def getFilters: List[Filter] = filters
 
+  /**
+   * Retrieves the configured output method for displaying or saving the result.
+   *
+   * @return The configured output method.
+   */
   def getOutput: ASCIIOutput = output
 
+  /**
+   * Retrieves information about the table to be used for ASCII conversion.
+   *
+   * @return A tuple where the first element indicates whether a predefined table is used,
+   *         and the second element is the table name or custom input.
+   */
   def getTable: (Boolean, String) = {
     if (predefineTableUses) {
       return (true, predefineTableName)
@@ -221,8 +253,23 @@ class InputHandler {
     (false, customTableInput)
   }
 
+  /**
+   * Retrieves the type of translation to be used in ASCII conversion.
+   *
+   * @return `true` for linear translation, `false` for non-linear translation.
+   */
   def getTranslationType: Boolean = linearTranslation
 
+  /**
+   * Checks if the next parameter exists in the array based on the current index.
+   *
+   * This method is used to ensure that there is a next parameter available
+   * when extracting values from the command-line arguments array.
+   *
+   * @param i    The current index in the array.
+   * @param args The array of command-line arguments.
+   * @throws Exception if the next parameter does not exist, indicating an invalid argument.
+   */
   private def nextParameterExistsCheck(i: Int, args: Array[String]): Unit = {
     if (i == (args.length - 1)) {
       throw new Exception("Invalid argument.")
