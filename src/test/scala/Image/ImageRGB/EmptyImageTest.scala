@@ -1,4 +1,5 @@
-package Image
+package Image.ImageRGB
+
 import org.scalatest.FunSuite
 
 class EmptyImageTest extends FunSuite {

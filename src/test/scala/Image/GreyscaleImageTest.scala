@@ -1,4 +1,5 @@
 package Image
+import Image.ImageRGB.ImportedImage
 import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite

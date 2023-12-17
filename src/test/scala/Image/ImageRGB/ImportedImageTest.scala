@@ -1,4 +1,5 @@
-package Image
+package Image.ImageRGB
+
 import Import.ImageImporterImageIO
 import org.scalatest.FunSuite
 

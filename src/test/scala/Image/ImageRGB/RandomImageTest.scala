@@ -1,5 +1,5 @@
-package Image
-import Image.RandomImage
+package Image.ImageRGB
+
 import org.scalatest.FunSuite
 
 class RandomImageTest extends FunSuite{
