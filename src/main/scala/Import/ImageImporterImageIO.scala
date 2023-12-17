@@ -6,11 +6,11 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import javax.imageio.ImageIO
 
-class ImageImporterImageIO() extends ImageImporter {
+class ImageImporterImageIO() extends ImageImporter[String] {
 
-  def loadFrom(path: String): ImportedImage = {
+  def loadFrom(source: String): ImportedImage = {
     try {
-      val imageFile: File = new File(path)
+      val imageFile: File = new File(source)
       val image: BufferedImage = ImageIO.read(imageFile)
       new ImportedImage(image.getHeight, image.getWidth, image)
     } catch {

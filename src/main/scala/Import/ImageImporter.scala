@@ -1,7 +1,7 @@
 package Import
 import Image.ImportedImage
 
-trait ImageImporter {
+trait ImageImporter[T] {
 
-  def loadFrom(path: String): ImportedImage
+  def loadFrom(source: T): ImportedImage
 }
