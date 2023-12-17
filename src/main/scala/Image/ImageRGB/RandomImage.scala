@@ -1,9 +1,9 @@
-package Image
-import java.awt.image.BufferedImage
+package Image.ImageRGB
 import java.awt.Color
+import java.awt.image.BufferedImage
 import java.util.Random
 
-class RandomImage(height: Int, width: Int) extends Image {
+class RandomImage(height: Int, width: Int) extends ImageRGB {
 
   private val image: BufferedImage = this.generateImage
 
