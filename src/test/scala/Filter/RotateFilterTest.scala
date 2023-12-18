@@ -24,6 +24,17 @@ class RotateFilterTest extends FunSuite {
     assert(greyscale.equals(filteredGreyscale))
   }
 
+  test("Applying rotate filter with multiples of 90 degree.") {
+    val importer = new ImageImporterImageIO
+    val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
+    val greyscale = greyscaler.translate()
+
+    for (multi <- 1 to 8) {
+      val rotateFilter = new RotateFilter(90 * multi)
+      val filteredGreyscale = rotateFilter.apply(greyscale)
+    }
+  }
+
   test("Applying rotate filter with value that is not multiples of 90.") {
     val exception = intercept[Exception] {
       val importer = new ImageImporterImageIO
