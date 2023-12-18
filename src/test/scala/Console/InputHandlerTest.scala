@@ -1,6 +1,5 @@
 package Console
 import org.scalatest.FunSuite
-import scala.util.{Try, Success, Failure}
 
 class InputHandlerTest extends FunSuite {
 
@@ -95,9 +94,6 @@ class InputHandlerTest extends FunSuite {
     }
 
     assert(exception.getMessage == "Invalid rotate value.")
-
-    val input = new InputHandler()
-    input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--rotate", "36000", "--output-file", "testfiles/created_file.txt"))
   }
 
   test("Invalid brightness value.") {
@@ -121,9 +117,6 @@ class InputHandlerTest extends FunSuite {
     }
 
     assert(exception.getMessage == "Invalid brightness value.")
-
-    val input = new InputHandler()
-    input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--brightness", "+255", "--output-file", "testfiles/created_file.txt"))
   }
 
   test("Invalid scale value.") {
@@ -133,12 +126,98 @@ class InputHandlerTest extends FunSuite {
     }
 
     assert(exception.getMessage == "Invalid scale value.")
+  }
 
+  test("Invalid font value.") {
+    var exception = intercept[Exception] {
+      val input = new InputHandler()
+      input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--font-aspect-ratio", "junk input", "--output-file", "testfiles/created_file.txt"))
+    }
+
+    assert(exception.getMessage == "Invalid aspect ratio value.")
+
+    exception = intercept[Exception] {
+      val input = new InputHandler()
+      input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--font-aspect-ratio", "x:1", "--output-file", "testfiles/created_file.txt"))
+    }
+
+    assert(exception.getMessage == "Invalid aspect ratio value.")
+
+    exception = intercept[Exception] {
+      val input = new InputHandler()
+      input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--font-aspect-ratio", "1:y", "--output-file", "testfiles/created_file.txt"))
+    }
+
+    assert(exception.getMessage == "Invalid aspect ratio value.")
+
+    exception = intercept[Exception] {
+      val input = new InputHandler()
+      input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--font-aspect-ratio", "x:y", "--output-file", "testfiles/created_file.txt"))
+    }
+
+    assert(exception.getMessage == "Invalid aspect ratio value.")
+  }
+
+  test("Valid inputs with brightness filter") {
     val input = new InputHandler()
-    input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--scale", "0.25", "--output-file", "testfiles/created_file.txt"))
+    for (brightness <- -255 to 255) {
+      input.handle(Array("--image-random", "--brightness", brightness.toString, "--output-file", "testfiles/created_file.txt"))
+    }
+  }
 
-    input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--scale", "1", "--output-file", "testfiles/created_file.txt"))
+  test("Valid inputs with flip filter") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--flip", "x", "--output-file", "testfiles/created_file.txt"))
+    input.handle(Array("--image-random", "--flip", "y", "--output-file", "testfiles/created_file.txt"))
+  }
 
-    input.handle(Array("--image", "testfiles/reflexed_cowboys.jpg", "--scale", "4", "--output-file", "testfiles/created_file.txt"))
+  test("Valid inputs with font filter") {
+    val input = new InputHandler()
+    for (x <- 1 to 8) {
+      for(y <- 1 to 8) {
+        input.handle(Array("--image-random", "--font-aspect-ratio", x.toString.concat(":").concat(y.toString), "--output-file", "testfiles/created_file.txt"))
+      }
+    }
+  }
+
+  test("Valid inputs with invert filter") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--invert", "--output-file", "testfiles/created_file.txt"))
+  }
+
+  test("Valid inputs with rotate filter") {
+    val input = new InputHandler()
+    for (m <- 1 to 4) {
+      input.handle(Array("--image-random", "--rotate", (m * 90).toString, "--output-file", "testfiles/created_file.txt"))
+      input.handle(Array("--image-random", "--rotate", "+".concat((m * 90).toString), "--output-file", "testfiles/created_file.txt"))
+      input.handle(Array("--image-random", "--rotate", "-".concat((m * 90).toString), "--output-file", "testfiles/created_file.txt"))
+    }
+  }
+
+  test("Valid inputs with scale filter") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--scale", "1", "--output-file", "testfiles/created_file.txt"))
+    input.handle(Array("--image-random", "--scale", "0.25", "--output-file", "testfiles/created_file.txt"))
+    input.handle(Array("--image-random", "--scale", "4", "--output-file", "testfiles/created_file.txt"))
+  }
+
+  test("Valid inputs with predefined table") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--table", "ten_levels", "--output-file", "testfiles/created_file.txt"))
+  }
+
+  test("Valid input with custom table") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--custom-table", " -+", "--output-file", "testfiles/created_file.txt"))
+  }
+
+  test("Valid input with custom non-linear table") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--custom-table", " :100;-:50;+:75", "--use-non-linear", "--output-file", "testfiles/created_file.txt"))
+  }
+
+  test("Valid input with custom table after changing back from non-linear") {
+    val input = new InputHandler()
+    input.handle(Array("--image-random", "--table", "ten_levels", "--use-non-linear", "--use-linear", "--output-file", "testfiles/created_file.txt"))
   }
 }
