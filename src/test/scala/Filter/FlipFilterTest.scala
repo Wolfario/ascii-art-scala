@@ -1,7 +1,6 @@
 package Filter
 import Image.GreyscaleImage
 import Image.ImageRGB.RandomImage
-import Import.ImageImporterImageIO
 import Translation.GreyscaleTranslator
 import org.scalatest.FunSuite
 
@@ -16,29 +15,32 @@ class FlipFilterTest extends FunSuite {
   }
 
   test("Applying flip filter on RandomImage with X axis.") {
-    val randomImage = new GreyscaleImage(0, 0, Array.empty)
+    val randomImage = new RandomImage(150, 150)
+    val greyscaler = new GreyscaleTranslator(randomImage)
+    val randomGreyscaleImage = greyscaler.translate()
 
     val flipFilterLower = new FlipFilter('x')
-    val filteredRandomImageLower = flipFilterLower.apply(randomImage)
+    val filteredRandomImageLower = flipFilterLower.apply(randomGreyscaleImage)
 
     val flipFilterUpper = new FlipFilter('X')
-    val filteredRandomImageUpper = flipFilterUpper.apply(randomImage)
+    val filteredRandomImageUpper = flipFilterUpper.apply(randomGreyscaleImage)
   }
 
   test("Applying flip filter on RandomImage with Y axis.") {
-    val randomImage = new GreyscaleImage(0, 0, Array.empty)
+    val randomImage = new RandomImage(150, 150)
+    val greyscaler = new GreyscaleTranslator(randomImage)
+    val randomGreyscaleImage = greyscaler.translate()
 
     val flipFilterLower = new FlipFilter('y')
-    val filteredRandomImageLower = flipFilterLower.apply(randomImage)
+    val filteredRandomImageLower = flipFilterLower.apply(randomGreyscaleImage)
 
     val flipFilterUpper = new FlipFilter('Y')
-    val filteredRandomImageUpper = flipFilterUpper.apply(randomImage)
+    val filteredRandomImageUpper = flipFilterUpper.apply(randomGreyscaleImage)
   }
 
   test("Applying flip filter with wrong axis value.") {
     var exception = intercept[Exception] {
-      val importer = new ImageImporterImageIO
-      val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
+      val greyscaler = new GreyscaleTranslator(new RandomImage(150, 150))
       val greyscale = greyscaler.translate()
 
       val flipFilter = new FlipFilter('u')
@@ -48,8 +50,7 @@ class FlipFilterTest extends FunSuite {
     assert(exception.getMessage == "Wrong flip axis.")
 
     exception = intercept[Exception] {
-      val importer = new ImageImporterImageIO
-      val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
+      val greyscaler = new GreyscaleTranslator(new RandomImage(150, 150))
       val greyscale = greyscaler.translate()
 
       val flipFilter = new FlipFilter(' ')
