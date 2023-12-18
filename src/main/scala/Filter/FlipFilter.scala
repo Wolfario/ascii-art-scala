@@ -1,15 +1,15 @@
 package Filter
 import Image.GreyscaleImage
 
-class FlipFilter(axis: String) extends Filter {
+class FlipFilter(axis: Char) extends Filter {
 
   override def apply(image: GreyscaleImage): GreyscaleImage = {
     var flipImage: Array[Array[Int]] = image.get
 
-    if (axis(0) == 'x' && axis.length == 1) {
+    if (axis.toLower == 'x') {
       flipImage = flipX(image.getSize._2, image.getSize._1, image.get)
     }
-    else if (axis(0) == 'y' && axis.length == 1) {
+    else if (axis.toLower == 'y') {
       flipImage = flipY(image.getSize._2, image.getSize._1, image.get)
     }
     else {

@@ -93,7 +93,10 @@ class InputHandler {
           case "flip" =>
             nextParameterExistsCheck(i, args)
 
-            val newFilter = new FlipFilter(args.apply(i + 1))
+            if (args.apply(i + 1).length != 1) {
+              throw new Exception("Wrong flip axis.")
+            }
+            val newFilter = new FlipFilter(args.apply(i + 1)(0))
             filters = filters :+ newFilter
 
             // In next iteration will be method value, so we need to skip it
