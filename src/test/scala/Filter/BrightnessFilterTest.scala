@@ -11,4 +11,12 @@ class BrightnessFilterTest extends FunSuite {
 
     assert(emptyGreyscale.equals(filteredGreyscale))
   }
+
+  test("Applying brightness filter with all valid inputs.") {
+    val emptyGreyscale = new GreyscaleImage(0, 0, Array.empty)
+    for (brightness <- -255 to 255) {
+      val brightnessFilter = new BrightnessFilter(brightness)
+      val filteredGreyscale = brightnessFilter.apply(emptyGreyscale)
+    }
+  }
 }
