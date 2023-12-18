@@ -1,8 +1,21 @@
 package Filter
 import Image.GreyscaleImage
 
+
+/**
+ * Represents a filter for flipping a greyscale image along a specified axis.
+ *
+ * @param axis The axis ('x' or 'y') along which to flip the image.
+ */
 class FlipFilter(axis: Char) extends Filter {
 
+  /**
+   * Applies the flip filter to a greyscale image along the specified axis.
+   *
+   * @param image The input greyscale image.
+   * @return A new greyscale image with flipped pixels along the specified axis.
+   * @throws Exception if the provided axis is not 'x' or 'y'.
+   */
   override def apply(image: GreyscaleImage): GreyscaleImage = {
     var flipImage: Array[Array[Int]] = image.get
 
@@ -18,6 +31,14 @@ class FlipFilter(axis: Char) extends Filter {
     new GreyscaleImage(image.getSize._1, image.getSize._2, flipImage)
   }
 
+  /**
+   * Flips a greyscale image along the X-axis.
+   *
+   * @param width  The width of the image.
+   * @param height The height of the image.
+   * @param image  The input greyscale image.
+   * @return A new greyscale image with pixels flipped along the X-axis.
+   */
   private def flipX(width: Int, height: Int, image: Array[Array[Int]]): Array[Array[Int]] = {
     val newImage = Array.ofDim[Int](height, width)
 
@@ -29,6 +50,14 @@ class FlipFilter(axis: Char) extends Filter {
     newImage
   }
 
+  /**
+   * Flips a greyscale image along the Y-axis.
+   *
+   * @param width  The width of the image.
+   * @param height The height of the image.
+   * @param image  The input greyscale image.
+   * @return A new greyscale image with pixels flipped along the Y-axis.
+   */
   private def flipY(width: Int, height: Int, image: Array[Array[Int]]): Array[Array[Int]] = {
     val newImage = Array.ofDim[Int](height, width)
 

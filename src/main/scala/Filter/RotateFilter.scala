@@ -1,12 +1,25 @@
 package Filter
 import Image.GreyscaleImage
+
+/**
+ * A filter for rotating a GreyscaleImage by a specified degree.
+ *
+ * @param degree The angle by which to rotate the image. Must be a multiple of 90.
+ * @throws Exception if the provided degree is not a multiple of 90.
+ */
 class RotateFilter(degree: Int) extends Filter {
 
   if ((degree % 90) != 0) {
     throw new Exception("Rotate value is not multiples of 90.")
   }
 
-   override def apply(image: GreyscaleImage): GreyscaleImage = {
+  /**
+   * Applies rotation to the given GreyscaleImage based on the specified degree.
+   *
+   * @param image The input GreyscaleImage to be rotated.
+   * @return A new GreyscaleImage with the applied rotation.
+   */
+  override def apply(image: GreyscaleImage): GreyscaleImage = {
      val grayscale = image.get
      val width = image.getSize._2
      val height = image.getSize._1
