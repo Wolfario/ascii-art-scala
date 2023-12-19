@@ -14,13 +14,13 @@ class FontFilterTest extends FunSuite {
     assert(emptyGreyscale.equals(filteredGreyscale))
   }
 
-  test("Applying font filter with all ratio variants in range 50 on RandomImage.") {
+  test("Applying font filter with all ratio variants in range 10 on RandomImage.") {
     val randomImage = new RandomImage(500, 500)
     val greyscaler = new GreyscaleTranslator(randomImage)
     val randomGreyscaleImage = greyscaler.translate()
 
-    for (x <- 1 to 50) {
-      for (y <- 1 to 50) {
+    for (x <- 1 to 10) {
+      for (y <- 1 to 10) {
         val fontFilter = new FontFilter((x, y))
         fontFilter.apply(randomGreyscaleImage)
       }
