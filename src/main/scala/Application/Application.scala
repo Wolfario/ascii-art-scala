@@ -81,6 +81,10 @@ class Application {
    * Handles the image processing and ASCII art generation based on the configured settings.
    */
   def handle(): Unit = {
+    if (image.getSize == (0, 0)) {
+      throw new Exception("Set image for translation.")
+    }
+
     val greyscaleTranslator = new GreyscaleTranslator(image)
 
     val greyscaleFilterTranslator = new GreyscaleFilterTranslator(greyscaleTranslator.translate(), filters)
