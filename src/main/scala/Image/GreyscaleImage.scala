@@ -2,7 +2,15 @@ package Image
 
 class GreyscaleImage(height: Int, width: Int, greyscaleImage: Array[Array[Int]]) extends Image[Array[Array[Int]]] {
 
-  override def get: Array[Array[Int]] = greyscaleImage
+  override def get: Array[Array[Int]] = {
+    val copy = Array.ofDim[Int](height, width)
+    for (i <- 0 until height) {
+      for (j <- 0 until width) {
+        copy(i)(j) = greyscaleImage(i)(j)
+      }
+    }
+    copy
+  }
 
   override def getSize: (Int, Int) = (height, width)
 
