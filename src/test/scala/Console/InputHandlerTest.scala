@@ -3,6 +3,34 @@ import org.scalatest.FunSuite
 
 class InputHandlerTest extends FunSuite {
 
+  test("Initial object getter value of image is 0x0 image") {
+    val input = new InputHandler()
+    assert(input.getImage.getSize == (0, 0))
+  }
+
+  test("Initial object getter value of filters is empty list") {
+    val input = new InputHandler()
+    assert(input.getFilters == List())
+  }
+
+  test("Initial object getter value of output is ASCIIOutputEmpty class") {
+    val exception = intercept[Exception] {
+      val input = new InputHandler()
+      input.getOutput.output()
+    }
+    assert(exception.getMessage == "Cannot use empty output methods. Set correct output.")
+  }
+
+  test("Initial object getter value of predefine table is standard") {
+    val input = new InputHandler()
+    assert(input.getTable._2 == "standard")
+  }
+
+  test("Initial object getter value of translation type is linear (true value of private linearTranslation)") {
+    val input = new InputHandler()
+    assert(input.getTranslationType)
+  }
+
   test("No arguments in input.") {
     val exception = intercept[Exception] {
       val input = new InputHandler()
