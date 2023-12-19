@@ -24,7 +24,7 @@ class GreyscaleImageTest extends FunSuite {
   test("Comparing two objects of different files") {
     val importer = new ImageImporterImageIO
 
-    val image1: ImportedImage = importer.loadFrom("testfiles/reflexed_cowboys.jpg")
+    val image1: ImportedImage = importer.loadFrom("testfiles/small_art.png")
     val image2: ImportedImage = importer.loadFrom("testfiles/bunny.png")
 
     val greyscaleTranslatorImage1 = new GreyscaleTranslator(image1)

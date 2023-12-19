@@ -6,7 +6,7 @@ import org.scalatest.FunSuite
 
 class GreyscaleFilterTranslatorTest extends FunSuite {
   test("Applying brightness filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
@@ -23,7 +23,7 @@ class GreyscaleFilterTranslatorTest extends FunSuite {
   }
 
   test("Applying flip filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
@@ -40,7 +40,7 @@ class GreyscaleFilterTranslatorTest extends FunSuite {
   }
 
   test("Applying font filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
@@ -57,7 +57,7 @@ class GreyscaleFilterTranslatorTest extends FunSuite {
   }
 
   test("Applying invert filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
@@ -74,7 +74,7 @@ class GreyscaleFilterTranslatorTest extends FunSuite {
   }
 
   test("Applying rotate filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
@@ -91,7 +91,7 @@ class GreyscaleFilterTranslatorTest extends FunSuite {
   }
 
   test("Applying scale filter on RandomImage and comparing with same filtered image in place.") {
-    val randomImageRGB = new RandomImage(150, 150)
+    val randomImageRGB = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImageRGB)
     val randomGreyscaleImageRGB = greyscaler.translate()
 
