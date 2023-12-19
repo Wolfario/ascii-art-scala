@@ -24,7 +24,14 @@ class RandomImage(height: Int, width: Int) extends ImageRGB {
     }
     returnImage
   }
-  override def get: BufferedImage = image
+
+  override def get: BufferedImage = {
+    val copy = new BufferedImage(image.getWidth, image.getHeight, image.getType)
+    val g = copy.createGraphics()
+    g.drawImage(image, 0, 0, null)
+    g.dispose()
+    copy
+  }
 
   override def getSize: (Int, Int) = (height, width)
 }
