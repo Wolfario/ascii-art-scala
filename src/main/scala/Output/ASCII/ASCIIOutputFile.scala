@@ -13,6 +13,10 @@ class ASCIIOutputFile(path: String) extends ASCIIOutput {
   private val file = new File(path)
 
   override def output(): Unit = {
+    if (image.isEmpty) {
+      throw new Exception("Output isn't set.")
+    }
+
     val writer = new PrintWriter(file)
     for (row <- image) {
       for (char <- row) {
