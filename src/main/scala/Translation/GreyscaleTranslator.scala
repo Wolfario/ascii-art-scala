@@ -3,8 +3,18 @@ import java.awt.Color
 import Image.GreyscaleImage
 import Image.ImageRGB.ImageRGB
 
+/**
+ * Translates an RGB image into a GreyscaleImage by converting each pixel to greyscale.
+ *
+ * @param image The RGB image to be translated into greyscale.
+ */
 class GreyscaleTranslator(image: ImageRGB) extends Translator[GreyscaleImage] {
 
+  /**
+   * Translates the RGB image into a GreyscaleImage using a weighted average formula.
+   *
+   * @return The translated GreyscaleImage.
+   */
   override def translate(): GreyscaleImage = {
     val width = image.getSize._2
     val height = image.getSize._1
