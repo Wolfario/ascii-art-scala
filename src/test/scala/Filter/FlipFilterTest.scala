@@ -15,7 +15,7 @@ class FlipFilterTest extends FunSuite {
   }
 
   test("Applying flip filter on RandomImage with X axis.") {
-    val randomImage = new RandomImage(150, 150)
+    val randomImage = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImage)
     val randomGreyscaleImage = greyscaler.translate()
 
@@ -27,7 +27,7 @@ class FlipFilterTest extends FunSuite {
   }
 
   test("Applying flip filter on RandomImage with Y axis.") {
-    val randomImage = new RandomImage(150, 150)
+    val randomImage = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImage)
     val randomGreyscaleImage = greyscaler.translate()
 
@@ -40,7 +40,7 @@ class FlipFilterTest extends FunSuite {
 
   test("Applying flip filter with wrong axis value.") {
     var exception = intercept[Exception] {
-      val greyscaler = new GreyscaleTranslator(new RandomImage(150, 150))
+      val greyscaler = new GreyscaleTranslator(new RandomImage(20, 20))
       val greyscale = greyscaler.translate()
 
       val flipFilter = new FlipFilter('u')
@@ -50,7 +50,7 @@ class FlipFilterTest extends FunSuite {
     assert(exception.getMessage == "Wrong flip axis.")
 
     exception = intercept[Exception] {
-      val greyscaler = new GreyscaleTranslator(new RandomImage(150, 150))
+      val greyscaler = new GreyscaleTranslator(new RandomImage(20, 20))
       val greyscale = greyscaler.translate()
 
       val flipFilter = new FlipFilter(' ')

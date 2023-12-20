@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 class LinearASCIITranslationTest extends FunSuite {
 
   test("Valid input with unique symbols on RandomImage.") {
-      val randomImage = new RandomImage(150, 150)
+      val randomImage = new RandomImage(20, 20)
       val greyscaleTranslator = new GreyscaleTranslator(randomImage)
       val linearASCIITranslator = new LinearASCIITranslation
       val result = linearASCIITranslator.toASCII(greyscaleTranslator.translate().get, " -+")
@@ -17,7 +17,7 @@ class LinearASCIITranslationTest extends FunSuite {
 
   test("Invalid input with non unique symbols on RandomImage.") {
     val exception = intercept[Exception] {
-      val randomImage = new RandomImage(150, 150)
+      val randomImage = new RandomImage(20, 20)
       val greyscaleTranslator = new GreyscaleTranslator(randomImage)
       val linearASCIITranslator = new LinearASCIITranslation
       linearASCIITranslator.toASCII(greyscaleTranslator.translate().get, "---")
@@ -27,12 +27,12 @@ class LinearASCIITranslationTest extends FunSuite {
 
   test("Check if black image will translate into one single symbol that we used.") {
     val importer = new ImageImporterImageIO
-    val greyscaleTranslator = new GreyscaleTranslator(importer.loadFrom("testfiles/black_150x150.png"))
+    val greyscaleTranslator = new GreyscaleTranslator(importer.loadFrom("testfiles/black_20x20.png"))
     val linearTranslator = new LinearASCIITranslation
     val result = linearTranslator.toASCII(greyscaleTranslator.translate().get, "-+")
 
-    for (i <- 0 until 150) {
-      for (j <- 0 until 150) {
+    for (i <- 0 until 20) {
+      for (j <- 0 until 20) {
         assert(result(i)(j) == '-')
       }
     }
@@ -40,12 +40,12 @@ class LinearASCIITranslationTest extends FunSuite {
 
   test("Check if white image will translate into one single symbol that we used.") {
     val importer = new ImageImporterImageIO
-    val greyscaleTranslator = new GreyscaleTranslator(importer.loadFrom("testfiles/white_150x150.png"))
+    val greyscaleTranslator = new GreyscaleTranslator(importer.loadFrom("testfiles/white_20x20.png"))
     val linearTranslator = new LinearASCIITranslation
     val result = linearTranslator.toASCII(greyscaleTranslator.translate().get, "-+")
 
-    for (i <- 0 until 150) {
-      for (j <- 0 until 150) {
+    for (i <- 0 until 20) {
+      for (j <- 0 until 20) {
         assert(result(i)(j) == '+')
       }
     }

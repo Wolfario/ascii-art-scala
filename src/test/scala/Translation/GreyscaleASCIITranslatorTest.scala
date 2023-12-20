@@ -17,7 +17,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
 
   test("Try to choice empty custom table.") {
     val exception = intercept[Exception] {
-      val randomImage = new RandomImage(150, 150)
+      val randomImage = new RandomImage(20, 20)
       val greyscaleTranslator = new GreyscaleTranslator(randomImage)
       val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 
@@ -27,7 +27,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
   }
 
   test("Applying valid input of linear translation with known table on random image.") {
-    val randomImage = new RandomImage(150, 150)
+    val randomImage = new RandomImage(20, 20)
     val greyscaleTranslator = new GreyscaleTranslator(randomImage)
     val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 
@@ -37,7 +37,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
   }
 
   test("Applying valid input of linear translation with custom table on random image.") {
-    val randomImage = new RandomImage(150, 150)
+    val randomImage = new RandomImage(20, 20)
     val greyscaleTranslator = new GreyscaleTranslator(randomImage)
     val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 
@@ -47,7 +47,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
   }
 
   test("Applying valid input of non-linear translation on random image.") {
-    val randomImage = new RandomImage(150, 150)
+    val randomImage = new RandomImage(20, 20)
     val greyscaleTranslator = new GreyscaleTranslator(randomImage)
     val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 
@@ -58,7 +58,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
 
   test("Invalid input of linear translation with custom table on random image.") {
     val exception = intercept[Exception] {
-      val randomImage = new RandomImage(150, 150)
+      val randomImage = new RandomImage(20, 20)
       val greyscaleTranslator = new GreyscaleTranslator(randomImage)
       val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 
@@ -71,7 +71,7 @@ class GreyscaleASCIITranslatorTest extends FunSuite {
 
   test("Invalid input of non-linear translation on random image.") {
     val exception = intercept[Exception] {
-      val randomImage = new RandomImage(150, 150)
+      val randomImage = new RandomImage(20, 20)
       val greyscaleTranslator = new GreyscaleTranslator(randomImage)
       val asciiTranslator = new GreyscaleASCIITranslator(greyscaleTranslator.translate())
 

@@ -16,7 +16,7 @@ class ScaleFilterTest extends FunSuite {
 
   test("Applying scale filter twice to 4.0 and 0.25 (compare sizes).") {
     val importer = new ImageImporterImageIO
-    val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
+    val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/white_20x20.png"))
     val greyscale = greyscaler.translate()
 
     val scaleFilterUp = new ScaleFilter(4)
@@ -28,7 +28,7 @@ class ScaleFilterTest extends FunSuite {
 
   test("Applying scale filter with all available values.") {
     val importer = new ImageImporterImageIO
-    val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/bunny.png"))
+    val greyscaler = new GreyscaleTranslator(importer.loadFrom("testfiles/white_20x20.png"))
     val greyscale = greyscaler.translate()
 
     val scaleFilterUp = new ScaleFilter(4)

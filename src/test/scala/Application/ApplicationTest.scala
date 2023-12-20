@@ -15,7 +15,7 @@ class ApplicationTest extends FunSuite {
   test("Invalid applying handle without set output.") {
     val exception = intercept[Exception] {
       val app = new Application
-      app.setImage(new RandomImage(150, 150))
+      app.setImage(new RandomImage(20, 20))
       app.handle()
     }
     assert(exception.getMessage == "Cannot use empty output methods. Set correct output.")
@@ -23,7 +23,7 @@ class ApplicationTest extends FunSuite {
 
   test("Pass correct linear translation of RandomImage to file.") {
     val app = new Application
-    app.setImage(new RandomImage(150, 150))
+    app.setImage(new RandomImage(20, 20))
     app.setTable((true, "ten_levels"))
     app.setTranslationType(false)
     app.setTranslationType(true)

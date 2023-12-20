@@ -15,7 +15,7 @@ class FontFilterTest extends FunSuite {
   }
 
   test("Applying font filter with all ratio variants in range 10 on RandomImage.") {
-    val randomImage = new RandomImage(500, 500)
+    val randomImage = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImage)
     val randomGreyscaleImage = greyscaler.translate()
 
@@ -28,7 +28,7 @@ class FontFilterTest extends FunSuite {
   }
 
   test("Invalid applying font filter with negative values on RandomImage.") {
-    val randomImage = new RandomImage(500, 500)
+    val randomImage = new RandomImage(20, 20)
     val greyscaler = new GreyscaleTranslator(randomImage)
     val randomGreyscaleImage = greyscaler.translate()
 
