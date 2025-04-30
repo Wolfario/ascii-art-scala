@@ -1,13 +1,14 @@
-# ASCII Art
+# ASCII Image Converter
 
-[![pipeline status](https://gitlab.fit.cvut.cz/BI-OOP/B201/asciiart/badges/master/pipeline.svg)](https://gitlab.fit.cvut.cz/BI-OOP/B201/asciiart)
+This project is a Scala-based program that converts images into their ASCII representation and allows to apply filters. It was built with a strong focus on object-oriented design, clean code structure and thorough testing.
 
-The idea of this project is to load images, translate them into ASCII ART images, optionally apply filters, and save them. (https://courses.fit.cvut.cz/BI-OOP/projects/ASCII-art.html)
+## Project Description
 
-## How to do it
+The main idea is to take an input image (such as PNG or JPEG), process its pixel data, and produce a textual output that visually resembles the original image using ASCII characters. The brightness of each pixel is mapped to a character based on its intensity.
 
-1. **Make your repository private**
-2. **Read [the instructions](https://courses.fit.cvut.cz/BI-OOP/projects/ASCII-art.html)**
-3. Play [lofi hip hop radio](https://www.youtube.com/watch?v=jfKfPfyJRdk)
-4. [???](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
-5. Profit
+## Features
+
+- Converts standard image formats (e.g., PNG, JPEG) to ASCII art
+- Written entirely in Scala with OOP principles
+- Modular directory structure and clearly separated responsibilities
+- Well-tested with unit tests
